@@ -25,8 +25,8 @@ public class Sector {
 		sector = sector.toUpperCase();
 		
 		
-		
-		if(sector.equals()
+	
+		if(sector.equals(tiposSectores.PRODUCCION.toString())
 			produccion.add(gerente);
 		if(sector=="ventas")
 			ventas.add(gerente);
