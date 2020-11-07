@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Sector {
 
-	static ArrayList<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
-	static ArrayList<Persona> ventas;
-	static ArrayList<Persona> rrhh;
-	static ArrayList<Persona> administracion;
+	static HashSet<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
+	static HashSet<Persona> ventas;
+	static HashSet<Persona> rrhh;
+	static HashSet<Persona> administracion;
 	
 	public Sector() {
-		this.produccion= new ArrayList<Persona>();
-		this.ventas= new ArrayList<Persona>();
-		this.rrhh= new ArrayList<Persona>();
-		this.administracion= new ArrayList<Persona>();
+		this.produccion= new HashSet<Persona>();
+		this.ventas= new HashSet<Persona>();
+		this.rrhh= new HashSet<Persona>();
+		this.administracion= new HashSet<Persona>();
 		
 	}
 	
@@ -21,13 +21,19 @@ public class Sector {
 	
 	public void agregarGerente(Gerente gerente, String sector) {
 		
-		if(sector=="produccion")
+		TiposSectores tiposSectores;
+		sector = sector.toUpperCase();
+		
+		
+		
+		if(sector.equals()
 			produccion.add(gerente);
 		if(sector=="ventas")
 			ventas.add(gerente);
 		if(sector=="rrhh")
 			rrhh.add(gerente);
 		if(sector=="administracion")
+		// 	sector si ya psee un gerente 
 			administracion.add(gerente);
 		
 		
@@ -58,6 +64,7 @@ public class Sector {
 	
 	
 	}
+	
 	
 
 
