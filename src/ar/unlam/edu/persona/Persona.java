@@ -1,6 +1,8 @@
-package ar.unlam.edu.rrhh;
+package ar.unlam.edu.persona;
 
 import java.util.Calendar;
+
+import ar.unlam.edu.calendario.Calendario;
 
 public class Persona {
 

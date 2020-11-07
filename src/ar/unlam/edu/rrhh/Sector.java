@@ -3,6 +3,11 @@ package ar.unlam.edu.rrhh;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import ar.unlam.edu.persona.Empleado;
+import ar.unlam.edu.persona.Gerente;
+import ar.unlam.edu.persona.Jefe;
+import ar.unlam.edu.persona.Persona;
+
 public class Sector {
 
 	static HashSet<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
@@ -63,49 +68,49 @@ public class Sector {
 
 
 
-	public static ArrayList<Persona> getProduccion() {
+	public static HashSet<Persona> getProduccion() {
 		return produccion;
 	}
 
 
 
-	public static void setProduccion(ArrayList<Persona> produccion) {
+	public static void setProduccion(HashSet<Persona> produccion) {
 		Sector.produccion = produccion;
 	}
 
 
 
-	public static ArrayList<Persona> getVentas() {
+	public static HashSet<Persona> getVentas() {
 		return ventas;
 	}
 
 
 
-	public static void setVentas(ArrayList<Persona> ventas) {
+	public static void setVentas(HashSet<Persona> ventas) {
 		Sector.ventas = ventas;
 	}
 
 
 
-	public static ArrayList<Persona> getRrhh() {
+	public static HashSet<Persona> getRrhh() {
 		return rrhh;
 	}
 
 
 
-	public static void setRrhh(ArrayList<Persona> rrhh) {
+	public static void setRrhh(HashSet<Persona> rrhh) {
 		Sector.rrhh = rrhh;
 	}
 
 
 
-	public static ArrayList<Persona> getAdministracion() {
+	public static HashSet<Persona> getAdministracion() {
 		return administracion;
 	}
 
 
 
-	public static void setAdministracion(ArrayList<Persona> administracion) {
+	public static void setAdministracion(HashSet<Persona> administracion) {
 		Sector.administracion = administracion;
 	}
 	

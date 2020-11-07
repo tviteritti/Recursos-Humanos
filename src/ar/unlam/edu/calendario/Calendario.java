@@ -1,4 +1,4 @@
-package ar.unlam.edu.rrhh;
+package ar.unlam.edu.calendario;
 
 import java.util.GregorianCalendar;
 
