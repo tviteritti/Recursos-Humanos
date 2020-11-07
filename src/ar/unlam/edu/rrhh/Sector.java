@@ -1,19 +1,20 @@
 package ar.unlam.edu.rrhh;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Sector {
 
-	static ArrayList<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
-	static ArrayList<Persona> ventas;
-	static ArrayList<Persona> rrhh;
-	static ArrayList<Persona> administracion;
+	static HashSet<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
+	static HashSet<Persona> ventas;
+	static HashSet<Persona> rrhh;
+	static HashSet<Persona> administracion;
 	
 	public Sector() {
-		this.produccion= new ArrayList<Persona>();
-		this.ventas= new ArrayList<Persona>();
-		this.rrhh= new ArrayList<Persona>();
-		this.administracion= new ArrayList<Persona>();
+		this.produccion= new HashSet<Persona>();
+		this.ventas= new HashSet<Persona>();
+		this.rrhh= new HashSet<Persona>();
+		this.administracion= new HashSet<Persona>();
 		
 	}
 	
