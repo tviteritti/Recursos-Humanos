@@ -163,7 +163,7 @@ public class Persona implements CargaNovedades{
 	@Override
 	public Double salarioNeto(Integer nroMes) {
 		
-		return salarioBruto()-ausentismo[nroMes];
+		return salarioBruto()-ausentismo[nroMes-1];
 	}
 
 	@Override
@@ -179,15 +179,24 @@ public class Persona implements CargaNovedades{
 	}
 
 	@Override
-	public String reporteMensual() {
-		// TODO Auto-generated method stub
-		return null;
+	public String reporteMensual(Integer nroMes) {
+		
+		
+		return return "Saldo= "+ salarioNeto(nroMes-1)+", ausentismo= "+ausentismo[nroMes-1];
 	}
 
 	@Override
 	public String reporteAnual() {
-		// TODO Auto-generated method stub
-		return null;
+		Double anualSaldo=0.0;
+		Double anualFaltas=0.0;
+		for (Integer integer : ausentismo) {
+			anualSaldo+=salarioNeto(integer);
+		}
+		for (Integer integer : ausentismo) {
+			anualFaltas+=ausentismo[integer];
+		}
+		
+		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
 	}
 	
 }
