@@ -2,6 +2,7 @@ package ar.unlam.edu.persona;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 
 import ar.unlam.edu.calendario.Calendario;
 import ar.unlam.edu.rrhh.CargaNovedades;
@@ -224,27 +225,42 @@ public class Persona implements CargaNovedades{
 	}
 	
 	//AUSENTISMO Y ASIGNACION DE FECHA DE AUSENTISMO
-	private ArrayList <Calendar> fechas; /* un array de calendario para almacenar las fechas*/
-	private Integer diasFaltados; /*un contador de ausentismo*/
-	public void marcarAusente(Integer dia, Integer mes, Integer ano) {
-		Calendar aux = Calendar.getInstance(); /* se instancia el nuevo calendario aux*/
-		aux.set(ano, mes, dia);
-		fechas.add(aux);
-		this.diasFaltados++; /*aumenta*/
+	private HashSet <String> fechasAusentes; /*creo un set de string para obtener la loista de fechas*/
+	private Integer diasFaltados; /*contador de dias*/
+	private final Integer maxDias = 30; /*por ley solo tengo 30 dias maximos*/ 
+	
+	public Persona() {
+		fechasAusentes = new HashSet <String>(maxDias);
+		this.diasFaltados=0;
+	}
+	
+	
+	public Boolean marcarAusente(Integer dia, Integer mes, Integer ano) {
+		Calendar ausente = Calendar.getInstance();
+		ausente.set(Calendar.DATE, dia);
+		ausente.set(Calendar.MONTH, mes);
+		ausente.set(Calendar.YEAR, ano);
+		Integer d = ausente.get(Calendar.DATE);
+		Integer m =ausente.get(Calendar.MONTH);
+		Integer a =ausente.get(Calendar.YEAR);
+		String fecha = d+"/"+m+"/"+a;
+		if(this.fechasAusentes.size()<this.maxDias) {
+			this.fechasAusentes.add(fecha);	
+			this.diasFaltados++;
+			return true;
+		}
+		return false;
+	}
+	
+	public String verificarDiasAusentes() { /*obtengo una losta de las fechas ausentes*/
+		String fecha = "";
+		for (String string : fechasAusentes) {
+			fecha = fecha += string+"\n";
+		}
+		return fecha;
 	}
 
-	
-	public String verificarDiasAusentes() {
-		String reporte=null;
-		for (int i = 0; i < fechas.size(); i++) {
-			reporte = fechas.get(i).get(Calendar.DATE)+"/"+fechas.get(i).get(Calendar.MONTH)+"/"+fechas.get(i).get(Calendar.YEAR);
-		} /*no da un string de fecha en formato dd/mm/yyyy */
-		return reporte;
-	}
-	
 	public Integer obtenerDiasAusentes() {
-		return this.diasFaltados;  /*retorna el contador de los dias ausentes*/
-	}
-
-	
+	return this.diasFaltados;
+}
 }
