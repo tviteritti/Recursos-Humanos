@@ -3,8 +3,9 @@ package ar.unlam.edu.persona;
 import java.util.Calendar;
 
 import ar.unlam.edu.calendario.Calendario;
+import ar.unlam.edu.rrhh.CargaNovedades;
 
-public class Persona {
+public class Persona implements CargaNovedades{
 
 
 	private Integer dni; /*hashcode*/
@@ -14,7 +15,7 @@ public class Persona {
 	private Double salario;
 	private Integer numLegajo; /* hashcode*/
 	private Integer antiguedad;
-	private Integer ausentismo;
+	private Integer ausentismo[];
 	
 	
 	
@@ -25,7 +26,7 @@ public class Persona {
 		this.apellido = apellido;
 		this.fechaDeNacimiento = Calendar.getInstance();
 		this.salario=salario;
-		this.ausentismo=ausentismo;
+		this.ausentismo=new Integer[12];
 		this.antiguedad=antiguedad;
 	}
 
@@ -112,14 +113,15 @@ public class Persona {
 		this.antiguedad = antiguedad;
 	}
 
-	public Integer getAusentismo() {
+	
+	public Integer[] getAusentismo() {
 		return ausentismo;
 	}
 
-	public void setAusentismo(Integer ausentismo) {
+	public void setAusentismo(Integer[] ausentismo) {
 		this.ausentismo = ausentismo;
 	}
-	
+
 	public String getFecha_nac() {
 		Integer dia = fechaDeNacimiento.get(fechaDeNacimiento.DATE);
 		Integer mes = fechaDeNacimiento.get(fechaDeNacimiento.MONTH);
@@ -143,6 +145,49 @@ public class Persona {
 	            dif_ano = dif_ano - 1; 
 	        }
 	        return dif_ano;
+	}
+
+	@Override
+	public Integer obtenerFaltasDelMes(Integer nroMes) {
+		
+		
+		return ausentismo[nroMes-1];
+	}
+
+	@Override
+	public Double LiquidacionFinal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double salarioNeto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double salarioBruto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double calcularAntiguedad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reporteMensual() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reporteAnual() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

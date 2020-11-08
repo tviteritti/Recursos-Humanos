@@ -2,7 +2,7 @@ package ar.unlam.edu.rrhh;
 
 public interface CargaNovedades {
 	
-	public Integer obtenerFaltasDelMes(); /*me da la cant. de ausentismo en el mes*/
+	public Integer obtenerFaltasDelMes(Integer nroMes); /*me da la cant. de ausentismo en el mes*/
 	public Double LiquidacionFinal(); /*cuando un empleado renuncia o se jubila*/
 	public Double salarioNeto(); /* el basico + antiguedad - ausentismo*/
 	public Double salarioBruto(); /*el basico + antiguedad */
