@@ -9,6 +9,6 @@ public interface CargaNovedades {
 	public Double calcularAntiguedad(); /*a�os trabajados * el porcentaje de antiguedad*/
 	public String reporteMensual(Integer nroMes); /*no dira cuanto falto y cuando le corresponde*/
 	public String reporteAnual(); /*nos dara una cant. de dias ausentes y el promedio del salario en los 12 meses*/
-
+	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes);
 	
 }

@@ -20,7 +20,7 @@ public class Persona implements CargaNovedades{
 	
 	
 	
-	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento, Double salario, Integer antiguedad, Integer ausentismo) {
+	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento, Double salario, Integer antiguedad) {
 		this.numLegajo = numLegajo;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -204,7 +204,11 @@ public class Persona implements CargaNovedades{
 		
 		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
 	}
-	
+	@Override
+	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes) {
+		this.ausentismo[nroMes]=diasAusentes;
+		
+	}
 	
 	//AUSENTISMO Y ASIGNACION DE FECHA DE AUSENTISMO
 	private ArrayList <Calendar> fechas; /* un array de calendario para almacenar las fechas*/
