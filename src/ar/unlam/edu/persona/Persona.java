@@ -3,8 +3,10 @@ package ar.unlam.edu.persona;
 import java.util.Calendar;
 
 import ar.unlam.edu.calendario.Calendario;
+import ar.unlam.edu.rrhh.CargaNovedades;
 
-public class Persona {
+public class Persona implements CargaNovedades{
+
 
 	private Integer dni; /*hashcode*/
 	private String nombre;
@@ -13,7 +15,7 @@ public class Persona {
 	private Double salario;
 	private Integer numLegajo; /* hashcode*/
 	private Integer antiguedad;
-	private Integer ausentismo;
+	private Integer ausentismo[];
 	
 	
 	
@@ -24,14 +26,44 @@ public class Persona {
 		this.apellido = apellido;
 		this.fechaDeNacimiento = Calendar.getInstance();
 		this.salario=salario;
-		this.ausentismo=ausentismo;
+		this.ausentismo=new Integer[12];
 		this.antiguedad=antiguedad;
 	}
 
 	public Persona() {
 	}
 
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((numLegajo == null) ? 0 : numLegajo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		if (numLegajo == null) {
+			if (other.numLegajo != null)
+				return false;
+		} else if (!numLegajo.equals(other.numLegajo))
+			return false;
+		return true;
+	}
 	
 	public Integer getDni() {
 		return dni;
@@ -81,14 +113,15 @@ public class Persona {
 		this.antiguedad = antiguedad;
 	}
 
-	public Integer getAusentismo() {
+	
+	public Integer[] getAusentismo() {
 		return ausentismo;
 	}
 
-	public void setAusentismo(Integer ausentismo) {
+	public void setAusentismo(Integer[] ausentismo) {
 		this.ausentismo = ausentismo;
 	}
-	
+
 	public String getFecha_nac() {
 		Integer dia = fechaDeNacimiento.get(fechaDeNacimiento.DATE);
 		Integer mes = fechaDeNacimiento.get(fechaDeNacimiento.MONTH);
@@ -112,6 +145,58 @@ public class Persona {
 	            dif_ano = dif_ano - 1; 
 	        }
 	        return dif_ano;
+	}
+
+	@Override
+	public Integer obtenerFaltasDelMes(Integer nroMes) {
+		
+		
+		return ausentismo[nroMes-1];
+	}
+
+	@Override
+	public Double LiquidacionFinal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Double salarioNeto(Integer nroMes) {
+		
+		return salarioBruto()-ausentismo[nroMes-1];
+	}
+
+	@Override
+	public Double salarioBruto() {
+		Double bruto=this.salario+(this.salario*5/100)*this.antiguedad; 
+		return bruto;
+	}
+
+	@Override
+	public Double calcularAntiguedad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reporteMensual(Integer nroMes) {
+		
+		
+		return return "Saldo= "+ salarioNeto(nroMes-1)+", ausentismo= "+ausentismo[nroMes-1];
+	}
+
+	@Override
+	public String reporteAnual() {
+		Double anualSaldo=0.0;
+		Double anualFaltas=0.0;
+		for (Integer integer : ausentismo) {
+			anualSaldo+=salarioNeto(integer);
+		}
+		for (Integer integer : ausentismo) {
+			anualFaltas+=ausentismo[integer];
+		}
+		
+		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
 	}
 	
 }
