@@ -1,5 +1,6 @@
 package ar.unlam.edu.persona;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import ar.unlam.edu.calendario.Calendario;
@@ -204,4 +205,27 @@ public class Persona implements CargaNovedades{
 		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
 	}
 	
+	
+	//AUSENTISMO Y ASIGNACION DE FECHA DE AUSENTISMO
+	private ArrayList <Calendar> fechas; /* un array de calendario para almacenar las fechas*/
+	private Integer diasFaltados; /*un contador de ausentismo*/
+	public void marcarAusente(Integer dia, Integer mes, Integer ano) {
+		Calendar aux = Calendar.getInstance(); /* se instancia el nuevo calendario aux*/
+		aux.set(ano, mes, dia);
+		fechas.add(aux);
+		this.diasFaltados++; /*aumenta*/
+	}
+
+	
+	public String verificarDiasAusentes() {
+		String reporte=null;
+		for (int i = 0; i < fechas.size(); i++) {
+			reporte = fechas.get(i).get(Calendar.DATE)+"/"+fechas.get(i).get(Calendar.MONTH)+"/"+fechas.get(i).get(Calendar.YEAR);
+		} /*no da un string de fecha en formato dd/mm/yyyy */
+		return reporte;
+	}
+	
+	public Integer obtenerDiasAusentes() {
+		return this.diasFaltados;  /*retorna el contador de los dias ausentes*/
+	}
 }
