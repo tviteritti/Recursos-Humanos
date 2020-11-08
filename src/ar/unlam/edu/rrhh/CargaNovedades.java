@@ -4,7 +4,7 @@ public interface CargaNovedades {
 	
 	public Integer obtenerFaltasDelMes(Integer nroMes); /*me da la cant. de ausentismo en el mes*/
 	public Double LiquidacionFinal(); /*cuando un empleado renuncia o se jubila*/
-	public Double salarioNeto(); /* el basico + antiguedad - ausentismo*/
+	public Double salarioNeto(Integer nroMes); /* el basico + antiguedad - ausentismo*/
 	public Double salarioBruto(); /*el basico + antiguedad */
 	public Double calcularAntiguedad(); /*años trabajados * el porcentaje de antiguedad*/
 	public String reporteMensual(); /*no dira cuanto falto y cuando le corresponde*/

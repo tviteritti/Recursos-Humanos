@@ -161,15 +161,15 @@ public class Persona implements CargaNovedades{
 	}
 
 	@Override
-	public Double salarioNeto() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double salarioNeto(Integer nroMes) {
+		
+		return salarioBruto()-ausentismo[nroMes];
 	}
 
 	@Override
 	public Double salarioBruto() {
-		// TODO Auto-generated method stub
-		return null;
+		Double bruto=this.salario+(this.salario*5/100)*this.antiguedad; 
+		return bruto;
 	}
 
 	@Override
