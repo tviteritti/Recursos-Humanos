@@ -2,15 +2,16 @@ package ar.unlam.edu.rrhh;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 import ar.unlam.edu.persona.Empleado;
 import ar.unlam.edu.persona.Gerente;
 import ar.unlam.edu.persona.Jefe;
 import ar.unlam.edu.persona.Persona;
 
-public class Sector {
+public class Sector  implements DAO <Persona , Integer , String>{
 
-	static HashSet<Persona> produccion ;  //solo puede tener 1 gerente , 1 jefe por cada seccion y n empleados                                                     
+	static HashSet<Persona> produccion ;  //solo puede tener 1 gerente , 3 jefe por cada seccion y n empleados                                                     
 	static HashSet<Persona> ventas;
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;
@@ -25,8 +26,12 @@ public class Sector {
 	
 	
 	
-	public void agregarGerente(Gerente gerente, String sector) {
+	private Boolean agregarGerente(Gerente gerente, String sector) {
 		
+		
+		sector  = sector.toUpperCase();
+		
+		if (sector.equals(arg0))
 		if(sector=="produccion")
 			produccion.add(gerente);
 		if(sector=="ventas")
@@ -38,7 +43,7 @@ public class Sector {
 		
 		
 	}
-	public void agregarJefe(Jefe jefe, String sector) {
+	private Boolean agregarJefe(Jefe jefe, String sector) {
 		
 		if(sector=="produccion")
 			produccion.add(jefe);
@@ -51,7 +56,7 @@ public class Sector {
 		
 		
 	}
-	public void agregarEmpleado(Empleado empleado, String sector) {
+	private Boolean agregarEmpleado(Empleado empleado, String sector) {
 	
 		if(sector=="produccion")
 			produccion.add(empleado);
@@ -64,54 +69,153 @@ public class Sector {
 	
 	
 	}
+	private Boolean modificarPersona(Persona obj, String sector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean insertar(Persona obj , String sector) {
 	
-
-
-
-	public static HashSet<Persona> getProduccion() {
-		return produccion;
+		if ( obj instanceof Empleado) {
+			 Empleado empleado = (Empleado) obj; 
+			return agregarEmpleado(empleado,  sector); 
+		}
+		
+		if ( obj instanceof Jefe) {
+			Jefe gerente = (Jefe) obj; 
+			return agregarJefe(gerente , sector);
+		}
+		
+		if (obj instanceof Gerente) {
+			Gerente gerente = (Gerente) obj; 
+			return agregarGerente(gerente , sector);
+		}
+		
+		return false; 
+		
+		
 	}
 
 
 
-	public static void setProduccion(HashSet<Persona> produccion) {
-		Sector.produccion = produccion;
+	@Override
+	public Boolean actualizar(Persona obj, String sector) {
+		
+		if ( this.existe(obj.getDni())) {
+		 sector = sector.toUpperCase(); 
+		 return modificarPersona (obj , sector); 
+		}
+		return false; 
+		
 	}
 
 
 
-	public static HashSet<Persona> getVentas() {
-		return ventas;
+
+
+
+
+	@Override
+	public Persona buscar(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 
-	public static void setVentas(HashSet<Persona> ventas) {
-		Sector.ventas = ventas;
+	@Override
+	public Boolean guardar(Persona obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 
-	public static HashSet<Persona> getRrhh() {
-		return rrhh;
+	@Override
+	public Boolean existe(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 
-	public static void setRrhh(HashSet<Persona> rrhh) {
-		Sector.rrhh = rrhh;
+	@Override
+	public Boolean eliminar(Persona obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 
-	public static HashSet<Persona> getAdministracion() {
-		return administracion;
+	@Override
+	public Boolean darBaja(Persona obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
 
-	public static void setAdministracion(HashSet<Persona> administracion) {
-		Sector.administracion = administracion;
+	@Override
+	public Boolean darAlta(Persona obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Boolean cerrar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Set<Persona> getTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Set<Persona> getBajas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Set<Persona> getAltas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Boolean actualizar(Persona obj, String sector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Boolean existe(Integer id, String sector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Boolean eliminar(Persona obj, String sector) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
