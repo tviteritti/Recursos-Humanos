@@ -174,15 +174,15 @@ public class Persona implements CargaNovedades{
 
 	@Override
 	public Double calcularAntiguedad() {
-		// TODO Auto-generated method stub
-		return null;
+		double antiguedad=this.antiguedad*(this.antiguedad*5/100);
+		return antiguedad;
 	}
 
 	@Override
 	public String reporteMensual(Integer nroMes) {
 		
 		
-		return return "Saldo= "+ salarioNeto(nroMes-1)+", ausentismo= "+ausentismo[nroMes-1];
+		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
 	}
 
 	@Override
