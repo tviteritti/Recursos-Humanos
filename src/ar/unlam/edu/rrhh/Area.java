@@ -2,5 +2,5 @@ package ar.unlam.edu.rrhh;
 
 public enum Area {
 
-	PRDUCCION , ADMINISTRACION , RRHH, VENTAS ; 
+	PRODUCCION , ADMINISTRACION , RRHH, VENTAS ; 
 }

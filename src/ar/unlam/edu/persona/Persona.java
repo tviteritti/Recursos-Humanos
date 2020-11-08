@@ -37,6 +37,10 @@ public class Persona implements CargaNovedades{
 	}
 
 
+	public Persona(Integer id) {
+		this.dni = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

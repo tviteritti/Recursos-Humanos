@@ -2,6 +2,7 @@ package ar.unlam.edu.rrhh;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import ar.unlam.edu.persona.Empleado;
@@ -15,6 +16,7 @@ public class Sector  implements DAO <Persona , Integer , String>{
 	static HashSet<Persona> ventas;
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;
+	final static  Integer cantJefes = 3;
 	
 	public Sector() {
 		this.produccion= new HashSet<Persona>();
@@ -28,50 +30,150 @@ public class Sector  implements DAO <Persona , Integer , String>{
 	
 	private Boolean agregarGerente(Gerente gerente, String sector) {
 		
-		
 		sector  = sector.toUpperCase();
 		
-		if (sector.equals(arg0))
-		if(sector=="produccion")
-			produccion.add(gerente);
-		if(sector=="ventas")
-			ventas.add(gerente);
-		if(sector=="rrhh")
-			rrhh.add(gerente);
-		if(sector=="administracion")
-			administracion.add(gerente);
+		if (sector.equals(Area.PRODUCCION.name())) {
+			Iterator<Persona> it = produccion.iterator(); 
+			
+			while (it.hasNext()) {
+				if ( it.next() instanceof Gerente ) {
+					return false; 
+				}
+			}
+			return produccion.add(gerente);
+		}
 		
+		if (sector.equals(Area.ADMINISTRACION.name())) {
+			Iterator<Persona> it = administracion.iterator(); 
+			
+			while (it.hasNext()) {
+				if ( it.next() instanceof Gerente ) {
+					return false; 
+				}
+			}
+			return produccion.add(gerente);
+		}
+		
+		if (sector.equals(Area.RRHH.name())) {
+			Iterator<Persona> it = rrhh.iterator(); 
+			
+			while (it.hasNext()) {
+				if ( it.next() instanceof Gerente ) {
+					return false; 
+				}
+			}
+			return produccion.add(gerente);
+		}
+		
+		if (sector.equals(Area.VENTAS.name())) {
+			Iterator<Persona> it = ventas.iterator(); 
+			
+			while (it.hasNext()) {
+				if ( it.next() instanceof Gerente ) {
+					return false; 
+				}
+			}
+			return produccion.add(gerente);
+		}
+		
+		return false;
+
 		
 	}
+	
+	
 	private Boolean agregarJefe(Jefe jefe, String sector) {
+
 		
-		if(sector=="produccion")
-			produccion.add(jefe);
-		if(sector=="ventas")
-			ventas.add(jefe);
-		if(sector=="rrhh")
-			rrhh.add(jefe);
-		if(sector=="administracion")
-			administracion.add(jefe);
+		if (sector.equals(Area.ADMINISTRACION.name())) {
+			Iterator<Persona> it = administracion.iterator(); 
+			Integer cantJefesProduccion =0; 
+			while (it.hasNext()) {
+				if ( it.next() instanceof Jefe ) {
+					if (cantJefesProduccion == this.cantJefes )
+					return false; 
+					cantJefesProduccion++;
+				}
+			}
+			return produccion.add(jefe);
+		}
+		
+		if (sector.equals(Area.RRHH.name())) {
+			Iterator<Persona> it = rrhh.iterator(); 
+			Integer cantJefesProduccion =0; 
+			while (it.hasNext()) {
+				if ( it.next() instanceof Jefe ) {
+					if (cantJefesProduccion == this.cantJefes )
+					return false; 
+					cantJefesProduccion++;
+				}
+			}
+			return produccion.add(jefe);
+		}
+		
+		if (sector.equals(Area.VENTAS.name())) {
+			Iterator<Persona> it = ventas.iterator(); 
+			Integer cantJefesProduccion =0; 
+			while (it.hasNext()) {
+				if ( it.next() instanceof Jefe ) {
+					if (cantJefesProduccion == this.cantJefes )
+					return false; 
+					cantJefesProduccion++;
+				}
+			}
+			return produccion.add(jefe);
+		}
+		
+		if (sector.equals(Area.PRODUCCION.name())) {
+			Iterator<Persona> it = produccion.iterator(); 
+			Integer cantJefesProduccion =0; 
+			while (it.hasNext()) {
+				if ( it.next() instanceof Jefe ) {
+					if (cantJefesProduccion == this.cantJefes )
+					return false; 
+					cantJefesProduccion++;
+				}
+			}
+			return produccion.add(jefe);
+		}
+		
+		return false;
 		
 		
 	}
+	
 	private Boolean agregarEmpleado(Empleado empleado, String sector) {
 	
-		if(sector=="produccion")
-			produccion.add(empleado);
-		if(sector=="ventas")
-			ventas.add(empleado);
-		if(sector=="rrhh")
-			rrhh.add(empleado);
-		if(sector=="administracion")
-			administracion.add(empleado);
+		sector = sector.toUpperCase(); 
+		if ( sector.equals(Area.PRODUCCION.name())) {	
+			return produccion.add(empleado);
+		}
+		
+		if ( sector.equals(Area.ADMINISTRACION.name())) {	
+			return administracion.add(empleado);
+		}
+		
+		if ( sector.equals(Area.RRHH.name())) {	
+			return rrhh.add(empleado);
+		}
+		
+		if ( sector.equals(Area.VENTAS.name())) {	
+			return ventas.add(empleado);
+		}
+		
+		return false;
 	
 	
 	}
+	
+	
 	private Boolean modificarPersona(Persona obj, String sector) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		if (produccion.contains(obj) && sector.equals(Area.PRODUCCION.name())) {
+			produccion.remove(obj);
+		return 	produccion.add(obj);
+		}
+		return false; 
 	}
 
 	@Override
@@ -112,39 +214,85 @@ public class Sector  implements DAO <Persona , Integer , String>{
 
 
 
-
-
-
-
 	@Override
 	public Persona buscar(Integer id) {
-		// TODO Auto-generated method stub
+		if (this.existe(id)) {
+			 Persona persona = new Persona(id); 
+			return EncontradoPersona(persona); 
+		}
+		return null; 
+	}
+
+
+
+
+
+
+	private Persona EncontradoPersona(Persona id) {
+		
+		
+	
+		for (Persona persona : produccion) {
+			if(id.equals(persona.getDni()))
+					return persona;
+		}
+		
+		
+		for (Persona persona : administracion) {
+			if(id.equals(persona.getDni()))
+					return persona;
+		}
+		
+		for (Persona persona : rrhh) {
+			if(id.equals(persona.getDni()))
+					return persona;
+		}
+			
+		for (Persona persona : ventas) {
+			if(id.equals(persona.getDni()))
+					return persona;
+		}
+		
 		return null;
 	}
 
 
 
-	@Override
-	public Boolean guardar(Persona obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 
 	@Override
 	public Boolean existe(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		for (Persona persona : produccion) {
+			if(id.equals(persona.getDni()))
+					return true;
+		}
+		
+		
+		for (Persona persona : administracion) {
+			if(id.equals(persona.getDni()))
+					return true;
+		}
+		
+		for (Persona persona : rrhh) {
+			if(id.equals(persona.getDni()))
+					return true;
+		}
+			
+		for (Persona persona : ventas) {
+			if(id.equals(persona.getDni()))
+					return true;
+		}
+		
+		return false;
+		
 	}
 
 
 
-	@Override
-	public Boolean eliminar(Persona obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 
@@ -196,11 +344,7 @@ public class Sector  implements DAO <Persona , Integer , String>{
 
 
 
-	@Override
-	public Boolean actualizar(Persona obj, String sector) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 
