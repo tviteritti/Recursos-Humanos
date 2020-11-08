@@ -2,6 +2,8 @@ package ar.unlam.edu.rrhh;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 
 import ar.unlam.edu.persona.*;
@@ -34,6 +36,30 @@ public class testIan {
 		Double salarioBruto=Salario+(Salario*5/100)*antiguedad;
 		
 		assertEquals(jefe.salarioBruto(), salarioBruto);
+		
+		
+	}
+	
+	@Test
+	public void QueSecalculeCorrectamenteLaLiquidacionFinal() {
+		
+		
+	}
+	
+	@Test
+	public void QueSecalculeCorrectamenteElSalarioNeto() {
+		
+		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, 10, null);
+		
+		Integer ausentismo[]=new Integer [12];
+		ausentismo[4-1]=5;
+		jefe.setAusentismo(ausentismo);
+		
+		Double descuento=(double)(jefe.getSalario()/30)*jefe.obtenerFaltasDelMes(4);
+		Double salarioNeto=jefe.salarioBruto()-descuento;
+		
+		
+		assertEquals(jefe.salarioNeto(4), salarioNeto);
 		
 		
 	}
