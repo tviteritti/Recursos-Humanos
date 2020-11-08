@@ -162,8 +162,9 @@ public class Persona implements CargaNovedades{
 
 	@Override
 	public Double salarioNeto(Integer nroMes) {
+		Double  resta=(this.salario/30)*ausentismo[nroMes-1];
 		
-		return salarioBruto()-ausentismo[nroMes-1];
+		return salarioBruto()-resta;
 	}
 
 	@Override
