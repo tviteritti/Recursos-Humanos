@@ -155,9 +155,13 @@ public class Persona implements CargaNovedades{
 	}
 
 	@Override
-	public Double LiquidacionFinal() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double LiquidacionFinal(Integer nroMes) {
+		Calendar hoy = Calendar.getInstance();
+		Double salarioPorDia=salarioBruto()/30;
+		Integer diasRestantes=30-hoy.DAY_OF_MONTH;
+		Double salarioLiquidado=salarioNeto(nroMes)-(salarioPorDia*diasRestantes);
+		
+		return salarioLiquidado;
 	}
 
 	@Override
