@@ -20,7 +20,7 @@ public class Persona implements CargaNovedades{
 	
 	
 	
-	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendario fechaDeNacimiento, Double salario, Integer antiguedad, Integer ausentismo) {
+	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento, Double salario, Integer antiguedad, Integer ausentismo) {
 		this.numLegajo = numLegajo;
 		this.dni = dni;
 		this.nombre = nombre;
