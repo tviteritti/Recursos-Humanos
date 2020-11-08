@@ -47,7 +47,7 @@ public class testTomas {
 	
 
 	@Test
-	public void queSeCumplanSalarioNetoBruto() {
+	public void queSeCumplanSalarioNetoBrutoYAntiguedad() {
 		
 		Persona g1=new Gerente(1, 123, "jorge", "lopez", new Calendario(1999, 4, 3), 3007.0, 5);
 		Persona j1=new Jefe(2, 456, "federico", "perez", new Calendario(1995, 5, 12), 3000.0, 0);
@@ -62,14 +62,14 @@ public class testTomas {
 		Double expectedG=3758.75; //saldo 3007 antiguedad 5
 		assertEquals(expectedG, g1.salarioBruto());
 		
-		Double expectedJ=3000.0; //saldo 3007 antiguedad 5
+		Double expectedJ=3000.0; //saldo 3000 antiguedad 0
 		assertEquals(expectedJ, j1.salarioBruto());
 		
-		Double expectedE=3151.05; //saldo 3007 antiguedad 5
+		Double expectedE=3151.05; //saldo 3001 antiguedad 1
 		assertEquals(expectedE, e1.salarioBruto());
 		
 		
-		Double expectedG1=3257.58; //aisentismo 5
+		Double expectedG1=3257.58; //ausentismo 5
 		assertEquals(expectedG1, g1.salarioNeto(5),0.01);
 		
 		Double expectedJ1=2400.0; //ausentismo 6

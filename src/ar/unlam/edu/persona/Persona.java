@@ -17,6 +17,7 @@ public class Persona implements CargaNovedades{
 	private Integer numLegajo; /* hashcode*/
 	private Integer antiguedad;
 	private Integer ausentismo[];
+	private Boolean estado;
 	
 	
 	
@@ -29,6 +30,7 @@ public class Persona implements CargaNovedades{
 		this.salario=salario;
 		this.ausentismo=new Integer[12];
 		this.antiguedad=antiguedad;
+		this.estado=true;
 	}
 
 	public Persona() {
@@ -211,6 +213,12 @@ public class Persona implements CargaNovedades{
 		
 	}
 	
+	@Override
+	public void renunciarJubilarce() {
+		this.estado=false;
+		
+	}
+	
 	//AUSENTISMO Y ASIGNACION DE FECHA DE AUSENTISMO
 	private ArrayList <Calendar> fechas; /* un array de calendario para almacenar las fechas*/
 	private Integer diasFaltados; /*un contador de ausentismo*/
@@ -233,4 +241,6 @@ public class Persona implements CargaNovedades{
 	public Integer obtenerDiasAusentes() {
 		return this.diasFaltados;  /*retorna el contador de los dias ausentes*/
 	}
+
+	
 }
