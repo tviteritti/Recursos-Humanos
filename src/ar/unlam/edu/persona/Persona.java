@@ -6,6 +6,7 @@ import ar.unlam.edu.calendario.Calendario;
 
 public class Persona {
 
+
 	private Integer dni; /*hashcode*/
 	private String nombre;
 	private String apellido;
@@ -31,7 +32,37 @@ public class Persona {
 	public Persona() {
 	}
 
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((numLegajo == null) ? 0 : numLegajo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		if (numLegajo == null) {
+			if (other.numLegajo != null)
+				return false;
+		} else if (!numLegajo.equals(other.numLegajo))
+			return false;
+		return true;
+	}
 	
 	public Integer getDni() {
 		return dni;
