@@ -194,19 +194,20 @@ public class Persona implements CargaNovedades{
 	@Override
 	public String reporteAnual() {
 		Double anualSaldo=0.0;
-		Double anualFaltas=0.0;
-		for (Integer integer : ausentismo) {
-			anualSaldo+=salarioNeto(integer);
-		}
-		for (Integer integer : ausentismo) {
-			anualFaltas+=ausentismo[integer];
+		Integer anualFaltas=0;
+		for (int i = 1; i < 13; i++) {
+			anualSaldo+=salarioNeto(i);
+		} 	
+		for (int i = 0; i < 12; i++) {
+			anualFaltas+=ausentismo[i];
 		}
 		
 		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
 	}
+	
 	@Override
 	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes) {
-		this.ausentismo[nroMes]=diasAusentes;
+		this.ausentismo[nroMes-1]=diasAusentes;
 		
 	}
 	

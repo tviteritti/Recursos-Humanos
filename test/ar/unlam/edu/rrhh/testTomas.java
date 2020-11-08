@@ -19,7 +19,7 @@ public class testTomas {
 		Persona j1=new Jefe(2, 456, "federico", "perez", new Calendario(1995, 5, 12), 3000.0, 0);
 		Persona e1=new Empleado(3, 789, "tomas", "diaz", new Calendario(1993, 7, 1), 3001.0, 1);
 		
-		for (int i = 0; i < 12; i++) {
+		for (int i = 1; i < 13; i++) {
 			g1.setDiasAusentesEnUnMes(i, i);
 			j1.setDiasAusentesEnUnMes(i+1, i);
 			e1.setDiasAusentesEnUnMes(i+2, i);
@@ -30,15 +30,15 @@ public class testTomas {
 		assertNotNull(e1);
 		
 		Integer faltasG= g1.obtenerFaltasDelMes(1);
-		Integer expectedG=0;
+		Integer expectedG=1;
 		assertEquals(expectedG,faltasG);
 		
 		Integer faltasF= j1.obtenerFaltasDelMes(1);;
-		Integer expectedF=1;
+		Integer expectedF=2;
 		assertEquals(expectedF,faltasF);
 		
 		Integer faltasE= e1.obtenerFaltasDelMes(1);
-		Integer expectedE=2;
+		Integer expectedE=3;
 		assertEquals(expectedE,faltasE);
 		
 		
@@ -53,7 +53,7 @@ public class testTomas {
 		Persona j1=new Jefe(2, 456, "federico", "perez", new Calendario(1995, 5, 12), 3000.0, 0);
 		Persona e1=new Empleado(3, 789, "tomas", "diaz", new Calendario(1993, 7, 1), 3001.0, 1);
 		
-		for (int i = 0; i < 12; i++) {
+		for (int i = 1; i < 13; i++) {
 			g1.setDiasAusentesEnUnMes(i, i);
 			j1.setDiasAusentesEnUnMes(i+1, i);
 			e1.setDiasAusentesEnUnMes(i+2, i);
@@ -69,14 +69,17 @@ public class testTomas {
 		assertEquals(expectedE, e1.salarioBruto());
 		
 		
-		Double expectedG1=3357.816; //aisentismo 4
+		Double expectedG1=3257.58; //aisentismo 5
 		assertEquals(expectedG1, g1.salarioNeto(5),0.01);
 		
-		Double expectedJ1=2500.0; //ausentismo 5
+		Double expectedJ1=2400.0; //ausentismo 6
 		assertEquals(expectedJ1, j1.salarioNeto(5),0.01);
 		
-		Double expectedE1=2550.85; //ausentismo 6
+		Double expectedE1=2450.82; //ausentismo 7
 		assertEquals(expectedE1, e1.salarioNeto(5),0.01);
+		
+		g1.reporteAnual();
+		g1.reporteMensual(5);
 		
 	}
 
