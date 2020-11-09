@@ -15,9 +15,9 @@ public class testTomas {
 	@Test
 	public void queSeCumplanfaltasDelMes() {
 		
-		Persona g1=new Gerente(1, 123, "jorge", "lopez", new Calendario(1999, 4, 3), 3007.0, 5);
-		Persona j1=new Jefe(2, 456, "federico", "perez", new Calendario(1995, 5, 12), 3000.0, 0);
-		Persona e1=new Empleado(3, 789, "tomas", "diaz", new Calendario(1993, 7, 1), 3001.0, 1);
+		Persona g1=new Gerente(1, 123, "jorge", "lopez",null, 3007.0, 5);
+		Persona j1=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);
+		Persona e1=new Empleado(3, 789, "tomas", "diaz", null, 3001.0, 1);
 		
 		for (int i = 1; i < 13; i++) {
 			g1.setDiasAusentesEnUnMes(i, i);
@@ -49,9 +49,9 @@ public class testTomas {
 	@Test
 	public void queSeCumplanSalarioNetoBrutoYAntiguedad() {
 		
-		Persona g1=new Gerente(1, 123, "jorge", "lopez", new Calendario(1999, 4, 3), 3007.0, 5);
-		Persona j1=new Jefe(2, 456, "federico", "perez", new Calendario(1995, 5, 12), 3000.0, 0);
-		Persona e1=new Empleado(3, 789, "tomas", "diaz", new Calendario(1993, 7, 1), 3001.0, 1);
+		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Persona j1=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);
+		Persona e1=new Empleado(3, 789, "tomas", "diaz",null, 3001.0, 1);
 		
 		for (int i = 1; i < 13; i++) {
 			g1.setDiasAusentesEnUnMes(i, i);
