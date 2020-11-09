@@ -95,6 +95,20 @@ public class testIan {
 		
 	}
 	
+	@Test
+	public void QueNoSePuedaSacarUnReporteDeAlguienQueNoTrabaja() {
+		
+		Persona jefe=new Jefe(123, 123, "Jose", "Alvarez", null, 1000.0, 0);
+		
+		assertNotNull(jefe);
+		
+		jefe.renunciarJubilarce();
+		
+		assertNull(jefe.reporteAnual());
+		
+		
+	}
+	
 	
 
 }

@@ -18,7 +18,7 @@ public class Persona implements CargaNovedades{
 	private Integer numLegajo; /* hashcode*/
 	protected Integer antiguedad;
 	protected Integer ausentismo[];
-	private Boolean estado;
+	protected Boolean estado;
 	
 	
 	

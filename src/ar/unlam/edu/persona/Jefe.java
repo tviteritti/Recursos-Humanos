@@ -5,7 +5,7 @@ import java.util.Calendar;
 import ar.unlam.edu.calendario.Calendario;
 import ar.unlam.edu.rrhh.CargaNovedades;
 
-public class Jefe extends Empleado implements CargaNovedades{//bono de fin de año
+public class Jefe extends Empleado implements CargaNovedades{//bono de fin de aï¿½o
 
 	public Jefe(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento,
 			Double salario, Integer antiguedad) {
@@ -48,12 +48,20 @@ public class Jefe extends Empleado implements CargaNovedades{//bono de fin de añ
 	@Override
 	public String reporteMensual(Integer nroMes) {
 		
+		if(this.estado==false) {
+			return null;
+		}
 		
 		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
 	}
 
 	@Override
 	public String reporteAnual() {
+		
+		if(this.estado==false) {
+			return null;
+		}
+		
 		Double anualSaldo=0.0;
 		Integer anualFaltas=0;
 		for (int i = 1; i < 13; i++) {

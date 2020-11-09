@@ -49,12 +49,21 @@ public class Empleado extends Persona implements CargaNovedades{//un trabajador 
 	@Override
 	public String reporteMensual(Integer nroMes) {
 		
+		if(this.estado==false) {
+			return null;
+		}
+		
 		
 		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
 	}
 
 	@Override
 	public String reporteAnual() {
+		
+		if(this.estado==false) {
+			return null;
+		}
+		
 		Double anualSaldo=0.0;
 		Integer anualFaltas=0;
 		for (int i = 1; i < 13; i++) {
