@@ -34,8 +34,7 @@ public class Persona implements CargaNovedades{
 		this.estado=true;
 	}
 
-	public Persona() {
-	}
+	
 
 
 	public Persona(Integer id) {
@@ -229,7 +228,7 @@ public class Persona implements CargaNovedades{
 	private Integer diasFaltados; /*contador de dias*/
 	private final Integer maxDias = 30; /*por ley solo tengo 30 dias maximos*/ 
 	
-	public Persona() {
+	public  Persona() {
 		fechasAusentes = new HashSet <String>(maxDias);
 		this.diasFaltados=0;
 	}

@@ -14,6 +14,8 @@ public interface DAO<T, U, S> {
 	Boolean existe(U id, S sector);
 
 	Boolean existe(U id);
+	
+	Area Sector (T obj);
 
 	Boolean eliminar(T obj, S sector);
 
