@@ -14,10 +14,10 @@ public class Persona implements CargaNovedades{
 	private String nombre;
 	private String apellido;
 	private Calendar fechaDeNacimiento;
-	private Double salario;
+	protected Double salario;
 	private Integer numLegajo; /* hashcode*/
-	private Integer antiguedad;
-	private Integer ausentismo[];
+	protected Integer antiguedad;
+	protected Integer ausentismo[];
 	private Boolean estado;
 	
 	

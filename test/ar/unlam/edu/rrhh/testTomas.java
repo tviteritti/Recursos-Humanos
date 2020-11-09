@@ -119,5 +119,20 @@ public class testTomas {
 		
 	
 	}
+	
+	@Test
+	public void queFuncioneLaBusqueda() {
+		
+		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Sector s1= new Sector();
+		
+		Integer vo=s1.buscar(123).getDni();
+		Integer ve=123;
+		
+		assertEquals(ve, vo);
+		
+		
+		
+	}
 
 }
