@@ -10,12 +10,13 @@ import ar.unlam.edu.calendario.Calendario;
 import ar.unlam.edu.persona.Empleado;
 import ar.unlam.edu.persona.Gerente;
 import ar.unlam.edu.persona.Jefe;
+import ar.unlam.edu.persona.Persona;
 
 public class testEduar {
 	/*la fecha de nacimiento arroja null pero se puede setar con una instanciacion de la interface Calendar;*/
 
 	@Test
-	public void pruebaEmpleado() {
+	public void pruebaLiquidacionConEmpleado() {
 		
 		Empleado crew = new Empleado(1000, 12, "Juan", "Perez", null, 20000.0, 2);
 		
@@ -34,7 +35,7 @@ public class testEduar {
 	}
 	
 	@Test
-	public void pruebaGerente() {
+	public void pruebaLiquidacionConGerente() {
 		
 		Gerente local = new Gerente(1001, 13, "Jose", "Paez", null, 100000.0, 4);
 		
@@ -59,7 +60,7 @@ public class testEduar {
 	}
 	
 	@Test
-	public void pruebaConJefe() {
+	public void pruebaLiquidacionConConJefe() {
 		
 		Jefe  oficina = new Jefe(1006, 15, "Alberto", "Portillo", null, 50000.0, 8);
 		
@@ -80,6 +81,26 @@ public class testEduar {
 	
 	}
 	
+	
+	@Test
+	public void pruebaConsultasDeSector() {
+		
+		Gerente g1=new Gerente(1, 4215, "jorge", "lopez", null, 3007.0, 5);
+//		Sector s1= new Sector();
+		SectorDos s1= new SectorDos();
+		
+		s1.agregar(g1,"administracion");
+		
+		Integer dni = g1.getDni();
+		Integer vo=s1.buscar(4215, "administracion").getDni(); /*123 es l dni buscado*/
+		Integer ve=4215;	
+		assertEquals(ve, vo);
+			
+		assertNull(s1.buscar(42150, "administracion")); /*no encuentra porque no esta instanciado el empleado*///
+		
+		s1.eliminar(g1, "administracion");
+		assertNull(s1.buscar(4215, "administracion")); 
+	}
 	
 
 }
