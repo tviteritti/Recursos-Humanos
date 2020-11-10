@@ -106,7 +106,7 @@ public class testTomas {
 	}
 	
 	@Test
-	public void queFuncioneLaBusqueda() {
+	public void queFuncioneLaBusquedaAgregarYEliminar() {
 		
 		Persona g1=new Persona(1, 123, "jorge", "lopez", null, 3007.0, 5);
 //		Sector s1= new Sector();
@@ -121,7 +121,8 @@ public class testTomas {
 			
 		assertNull(s1.buscar(124, "administracion")); /*no encuentra porque no esta instanciado el empleado*/
 		
-		
+		s1.eliminar(g1, "administracion");
+		assertNull(s1.buscar(123, "administracion")); 
 		
 	}
 
