@@ -123,15 +123,18 @@ public class testTomas {
 	@Test
 	public void queFuncioneLaBusqueda() {
 		
-		Empleado g1=new Empleado(1, 123, "jorge", "lopez", null, 3007.0, 5);
-		Sector s1= new Sector();
+		Persona g1=new Persona(1, 123, "jorge", "lopez", null, 3007.0, 5);
+//		Sector s1= new Sector();
+		SectorDos s1= new SectorDos();
 		
-		s1.agregarEmpleado(g1, "RRHH");
+		s1.agregar(g1);
 		
-		Integer vo=s1.buscar(123).getDni();
-		Integer ve=123;
-		
+		Integer dni = g1.getDni();
+		Integer vo=s1.buscar(123).getDni(); /*123 es l dni buscado*/
+		Integer ve=123;	
 		assertEquals(ve, vo);
+			
+		assertNull(s1.buscar(124)); /*no encuentra porque no esta instanciado el empleado*/
 		
 		
 		

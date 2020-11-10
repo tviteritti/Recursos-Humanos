@@ -26,7 +26,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	private Boolean agregarGerente(Gerente gerente, String sector) {
+	public Boolean agregarGerente(Gerente gerente, String sector) {
 
 		sector = sector.toUpperCase();
 
@@ -78,7 +78,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	private Boolean agregarJefe(Jefe jefe, String sector) {
+	public Boolean agregarJefe(Jefe jefe, String sector) {
 
 		if (sector.equals(Area.ADMINISTRACION.name())) {
 			Iterator<Persona> it = administracion.iterator();
@@ -136,7 +136,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	private Boolean agregarEmpleado(Empleado empleado, String sector) {
+	public Boolean agregarEmpleado(Empleado empleado, String sector) {
 
 		sector = sector.toUpperCase();
 		if (sector.equals(Area.PRODUCCION.name())) {
@@ -159,7 +159,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	private Boolean modificarPersona(Persona obj, String sector) {
+	public Boolean modificarPersona(Persona obj, String sector) {
 
 		/*
 		 * if (produccion.contains(obj) && sector.equals(Area.PRODUCCION.name())) {
@@ -218,7 +218,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	private Persona EncontradoPersona(Integer id) {
+	public Persona EncontradoPersona(Integer id) {
 
 		Iterator <Persona>itad = administracion.iterator();
 		while(itad.hasNext()) {
