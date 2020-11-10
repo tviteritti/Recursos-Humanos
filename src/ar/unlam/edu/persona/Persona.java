@@ -157,7 +157,7 @@ public class Persona implements CargaNovedades {
 	@Override
 	public Integer obtenerFaltasDelMes(Integer nroMes) {
 
-		return ausentismo[nroMes +1];
+		return ausentismo[nroMes -1];
 	}
 
 	@Override
@@ -210,7 +210,7 @@ public class Persona implements CargaNovedades {
 
 	@Override
 	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes) {
-		this.ausentismo[nroMes +1] = diasAusentes;
+		this.ausentismo[nroMes -1] = diasAusentes;
 
 	}
 

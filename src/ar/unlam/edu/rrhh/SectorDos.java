@@ -10,22 +10,13 @@ public class SectorDos {
 	static HashSet<Persona> ventas;
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;
-<<<<<<< HEAD
-	final static Integer cantJefes = 3;
-=======
 	
-	
->>>>>>> 6de7b8b46960d68d307f95875f5283709bf7a264
-
 	public SectorDos() {
 		this.produccion = new HashSet<Persona>();
 		this.ventas = new HashSet<Persona>();
 		this.rrhh = new HashSet<Persona>();
 		this.administracion = new HashSet<Persona>();
-<<<<<<< HEAD
-=======
-		
->>>>>>> 6de7b8b46960d68d307f95875f5283709bf7a264
+
 	}
 	
 	
