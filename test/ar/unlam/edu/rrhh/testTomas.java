@@ -127,14 +127,14 @@ public class testTomas {
 //		Sector s1= new Sector();
 		SectorDos s1= new SectorDos();
 		
-		s1.agregar(g1);
+		s1.agregar(g1,"administracion");
 		
 		Integer dni = g1.getDni();
-		Integer vo=s1.buscar(123).getDni(); /*123 es l dni buscado*/
+		Integer vo=s1.buscar(123, "administracion").getDni(); /*123 es l dni buscado*/
 		Integer ve=123;	
 		assertEquals(ve, vo);
 			
-		assertNull(s1.buscar(124)); /*no encuentra porque no esta instanciado el empleado*/
+		assertNull(s1.buscar(124, "administracion")); /*no encuentra porque no esta instanciado el empleado*/
 		
 		
 		
