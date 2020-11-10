@@ -11,5 +11,6 @@ public interface CargaNovedades {
 	public String reporteAnual(); /*nos dara una cant. de dias ausentes y el promedio del salario en los 12 meses*/
 	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes);//setear los dias ausentes en un mes deteminado
 	public void renunciarJubilarce();//estado pasa a false
+	public Boolean estado();
 	
 }
