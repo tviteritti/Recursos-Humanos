@@ -102,6 +102,7 @@ public class testTomas {
 		s1.agregar(e1, "produccion");
 		assertFalse(s1.agregar(e1, "produccion"));
 		
+		assertEquals(3, s1.getProduccion().size());
 	
 	}
 	

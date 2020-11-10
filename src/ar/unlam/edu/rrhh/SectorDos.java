@@ -10,15 +10,15 @@ public class SectorDos {
 	static HashSet<Persona> ventas;
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;
-	final static Integer cantJefes = 3;
-	Persona persAux;
+	
+	
 
 	public SectorDos() {
 		this.produccion = new HashSet<Persona>();
 		this.ventas = new HashSet<Persona>();
 		this.rrhh = new HashSet<Persona>();
 		this.administracion = new HashSet<Persona>();
-		this.persAux = new Persona();
+		
 	}
 	
 	
@@ -115,4 +115,26 @@ public class SectorDos {
 		
 		return eliminado;
 	}
+
+
+	public static HashSet<Persona> getProduccion() {
+		return produccion;
+	}
+
+
+	public static HashSet<Persona> getVentas() {
+		return ventas;
+	}
+
+
+	public static HashSet<Persona> getRrhh() {
+		return rrhh;
+	}
+
+
+	public static HashSet<Persona> getAdministracion() {
+		return administracion;
+	}
+	
+	
 }
