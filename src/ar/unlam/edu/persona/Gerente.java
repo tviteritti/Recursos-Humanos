@@ -37,7 +37,7 @@ public class Gerente extends Persona implements CargaNovedades {//bono de fin de
 			neto = this.salarioBruto();
 		}else {
 			neto =  this.salarioBruto()-((this.salarioBruto()/30)*super.obtenerFaltasDelMes(nroMes));
-		}/*ej: 20000.0 + 2000.0 - (22000.0 /30 * 1)*/
+		}/*ej: 20000.0 + 2000.0 - (22000.0 /30 * 10)*/
 		return neto;
 	}
 	

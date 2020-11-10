@@ -13,7 +13,7 @@ import ar.unlam.edu.persona.Jefe;
 import ar.unlam.edu.persona.Persona;
 
 public class testEduar {
-	/*la fecha de nacimiento arroja null pero se puede setar con una instanciacion de la interface Calendar;*/
+	/*la fecha de nacimiento arroja null pero se puede setar con una instanciacion de la Clase calendar Calendar;*/
 
 	@Test
 	public void pruebaLiquidacionConEmpleado() {
@@ -43,18 +43,18 @@ public class testEduar {
 			Double vob = 120000.0;
 			assertEquals(veb, vob, 0.01);
 			
-			local.setDiasAusentesEnUnMes(10, 10);
-			Integer v = local.obtenerFaltasDelMes(10);
-			Integer e= 10;
-			assertEquals(v,e);
-			
-			Double ven=local.salarioNeto(10);
-			Double von=80000.0;
-			assertEquals(ven, von, 0.01);
+////			local.setDiasAusentesEnUnMes(10, 10);
+//			Integer v = local.obtenerFaltasDelMes(10);
+//			Integer e= 10;
+//			assertEquals(v,e);
+//			
+//			Double ven=local.salarioNeto(10);
+//			Double von=80000.0;
+//			assertEquals(ven, von, 0.01);
 			
 			
 			Double bono = local.obtenerBonoFinAnio();
-			Double bonoE = 48611.11; /*falto 10 dias*/
+			Double bonoE = 50000.0;//48611.11; /*falto 10 dias*/
 			assertEquals(bono, bonoE, 0.01);
 					
 	}
@@ -64,7 +64,7 @@ public class testEduar {
 		
 		Jefe  oficina = new Jefe(1006, 15, "Alberto", "Portillo", null, 50000.0, 8);
 		
-		oficina.cumplioObjetivos();
+		oficina.cumplioObjetivos(); /*suma fija de 5000.0*/
 		
 		Double veb = oficina.salarioBruto();
 		Double vob = 75000.0;
@@ -102,5 +102,28 @@ public class testEduar {
 		assertNull(s1.buscar(4215, "administracion")); 
 	}
 	
+	@Test
+	public void pruebaConDuplicadosEnElSector() {
+		
+		Persona p1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Persona p2=new Gerente(11, 1234, "jorge2", "lopez2", null, 3015.0, 6);
+
+		Persona p3=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);
+		Persona p4=new Empleado(33, 78910, "tomas2", "diaz2",null, 3101.0, 1);
+		SectorDos s1= new SectorDos();
+		
+		s1.agregar(p1, "produccion");
+		assertFalse(s1.agregar(p1, "produccion"));
+		
+		
+		s1.agregar(p3, "produccion");
+		assertFalse(s1.agregar(p3, "produccion"));
+		
+		
+		s1.agregar(p4, "produccion");
+		assertFalse(s1.agregar(p4, "produccion"));
+		
+		assertEquals(3, s1.getProduccion().size());
+	}
 
 }

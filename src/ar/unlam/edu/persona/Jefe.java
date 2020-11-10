@@ -39,7 +39,7 @@ public class Jefe extends Empleado implements CargaNovedades{//bono de fin de aï
 
 	public Double salarioNeto(Integer nroMes) {
 		Double neto = 0.0;
-		Double sinPremio = this.salarioBruto() - this.premioMensual;
+		Double sinPremio = this.salarioBruto() - this.premioMensual; /*70000.0*/
 		if(super.obtenerFaltasDelMes(nroMes).equals(null)) {
 			neto = this.salarioBruto();
 		}else {
