@@ -47,6 +47,7 @@ public class Jefe extends Empleado implements CargaNovedades{//bono de fin de aï
 		}/*ej: 20000.0 + 2000.0 - (22000.0 /30 * 1)*/
 		return neto;
 	}
+
 	
 	public void cumplioObjetivos() {
 		this.objetivos=true;

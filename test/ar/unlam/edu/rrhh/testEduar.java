@@ -12,6 +12,7 @@ import ar.unlam.edu.persona.Gerente;
 import ar.unlam.edu.persona.Jefe;
 
 public class testEduar {
+	/*la fecha de nacimiento arroja null pero se puede setar con una instanciacion de la interface Calendar;*/
 
 	@Test
 	public void pruebaEmpleado() {
@@ -78,5 +79,7 @@ public class testEduar {
 		assertEquals(ven, von, 0.01);
 	
 	}
+	
+	
 
 }

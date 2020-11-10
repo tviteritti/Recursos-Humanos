@@ -87,8 +87,9 @@ public class testTomas {
 	}
 	
 	@Test
-	public void queNoPermitaDuplicadosYmasDeLosQueSePueda() {
+	public void queNoPermitaDuplicados() {
 		
+<<<<<<< HEAD
 		Calendar fechaNac = Calendar.getInstance();
 		fechaNac.set(1992, 5, 15);
 		fechaNac.get(Calendar.YEAR);
@@ -96,39 +97,30 @@ public class testTomas {
 		Persona g1=new Gerente(1, 123, "jorge", "lopez", fechaNac, 3007.0, 5);
 		Persona g2=new Gerente(11, 1234, "jorge2", "lopez2", null, 3015.0, 6);
 
+=======
+		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+>>>>>>> 6de7b8b46960d68d307f95875f5283709bf7a264
 		Persona j1=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);
-		Persona j2=new Jefe(22, 4567, "federico2", "perez2", null, 3100.0, 7);
-		Persona j3=new Jefe(222, 45678, "federico3", "perez3", null, 3200.0, 5);
-		Persona j4=new Jefe(2222, 456789, "federico4", "perez4", null, 3300.0, 5);
+		Persona e1=new Empleado(33, 78910, "tomas2", "diaz2",null, 3101.0, 1);
+		SectorDos s1= new SectorDos();
 		
-		Persona e1=new Empleado(3, 789, "tomas", "diaz",null, 3001.0, 1);
-		Persona e2=new Empleado(33, 78910, "tomas2", "diaz2",null, 3101.0, 1);
-		
-		Sector s1= new Sector();
-		
-		s1.insertar(g1, "produccion");
-		s1.insertar(g1, "produccion");
-		s1.insertar(g2, "produccion");
-		
-		s1.insertar(j1, "produccion");
-		s1.insertar(j1, "produccion");
-		s1.insertar(j2, "produccion");
-		s1.insertar(j3, "produccion");
-		s1.insertar(j4, "produccion");
+		s1.agregar(g1, "produccion");
+		assertFalse(s1.agregar(g1, "produccion"));
 		
 		
-		s1.insertar(e1, "produccion");
-		s1.insertar(e1, "produccion");
-		s1.insertar(e2, "produccion");
+		s1.agregar(j1, "produccion");
+		assertFalse(s1.agregar(j1, "produccion"));
 		
 		
+		s1.agregar(e1, "produccion");
+		assertFalse(s1.agregar(e1, "produccion"));
 		
-		
+		assertEquals(3, s1.getProduccion().size());
 	
 	}
 	
 	@Test
-	public void queFuncioneLaBusqueda() {
+	public void queFuncioneLaBusquedaAgregarYEliminar() {
 		
 		Persona g1=new Persona(1, 123, "jorge", "lopez", null, 3007.0, 5);
 //		Sector s1= new Sector();
@@ -143,7 +135,8 @@ public class testTomas {
 			
 		assertNull(s1.buscar(124, "administracion")); /*no encuentra porque no esta instanciado el empleado*/
 		
-		
+		s1.eliminar(g1, "administracion");
+		assertNull(s1.buscar(123, "administracion")); 
 		
 	}
 

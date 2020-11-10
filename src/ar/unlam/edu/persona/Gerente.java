@@ -18,6 +18,7 @@ public class Gerente extends Persona implements CargaNovedades {//bono de fin de
 	public Gerente() {
 		super();
 	}
+	
 		
 	
 	public Double calcularAntiguedad() {
@@ -49,6 +50,7 @@ public class Gerente extends Persona implements CargaNovedades {//bono de fin de
 		}
 		return bono;
 	}
+
 	
 	
 	

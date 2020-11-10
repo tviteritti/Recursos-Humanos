@@ -43,6 +43,7 @@ public class Empleado extends Persona implements CargaNovedades{//un trabajador 
 		return neto;
 	}
 	
+
 	
 	
 	
