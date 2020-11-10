@@ -11,14 +11,12 @@ public class SectorDos {
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;
 	final static Integer cantJefes = 3;
-	Persona persAux;
 
 	public SectorDos() {
 		this.produccion = new HashSet<Persona>();
 		this.ventas = new HashSet<Persona>();
 		this.rrhh = new HashSet<Persona>();
 		this.administracion = new HashSet<Persona>();
-		this.persAux = new Persona();
 	}
 	
 	

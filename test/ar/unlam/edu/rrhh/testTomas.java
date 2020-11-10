@@ -1,6 +1,9 @@
+
 package ar.unlam.edu.rrhh;
 
 import static org.junit.Assert.*;
+
+import java.util.Calendar;
 
 import org.junit.Test;
 
@@ -86,7 +89,11 @@ public class testTomas {
 	@Test
 	public void queNoPermitaDuplicadosYmasDeLosQueSePueda() {
 		
-		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Calendar fechaNac = Calendar.getInstance();
+		fechaNac.set(1992, 5, 15);
+		fechaNac.get(Calendar.YEAR);
+		
+		Persona g1=new Gerente(1, 123, "jorge", "lopez", fechaNac, 3007.0, 5);
 		Persona g2=new Gerente(11, 1234, "jorge2", "lopez2", null, 3015.0, 6);
 
 		Persona j1=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);

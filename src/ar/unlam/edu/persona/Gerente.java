@@ -5,77 +5,51 @@ import java.util.Calendar;
 import ar.unlam.edu.calendario.Calendario;
 import ar.unlam.edu.rrhh.CargaNovedades;
 
-public class Gerente extends Jefe implements CargaNovedades {//bono de fin de a�o
+public class Gerente extends Persona implements CargaNovedades {//bono de fin de a�o
+	
+	private Double bonoFinAnio;
 
 	public Gerente(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento,
 			Double salario, Integer antiguedad) {
 		super(numLegajo, dni, nombre, apellido, fechaDeNacimiento, salario, antiguedad);
-		
+		this.bonoFinAnio=50000.0; 
 	} 
 
+	public Gerente() {
+		super();
+	}
+		
 	
-
-	@Override
-	public Double LiquidacionFinal() {
-		Calendar hoy = Calendar.getInstance();			
-		Double salarioPorDia=salarioBruto()/30;
-		Integer diasRestantes=30-hoy.get(Calendar.DAY_OF_MONTH);
-		Double salarioLiquidado=salarioNeto(hoy.get(Calendar.MONTH)+1)-(salarioPorDia*diasRestantes);		
-		
-		return salarioLiquidado;
+	public Double calcularAntiguedad() {
+		double antiguedad = super.getSalario() * (this.antiguedad*0.05);
+		return antiguedad;
 	}
-
-	@Override
-	public Double salarioNeto(Integer nroMes) {
-		Double  resta=(this.salario/30)*ausentismo[nroMes-1];
-		
-		return salarioBruto()-resta;
-	}
-
-	@Override
+	
 	public Double salarioBruto() {
-		Double bruto=this.salario+(this.salario*5/100)*this.antiguedad; 
+	Double bruto = this.getSalario() + this.calcularAntiguedad();
 		return bruto;
 	}
 
-	@Override
-	public Double calcularAntiguedad() {
-		double antiguedad=this.antiguedad*(this.antiguedad*5/100);
-		return antiguedad;
-	}
-
-	@Override
-	public String reporteMensual(Integer nroMes) {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
-	}
-
-	@Override
-	public String reporteAnual() {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		Double anualSaldo=0.0;
-		Integer anualFaltas=0;
-		for (int i = 1; i < 13; i++) {
-			anualSaldo+=salarioNeto(i);
-		} 	
-		for (int i = 0; i < 12; i++) {
-			anualFaltas+=ausentismo[i];
-		}
-		
-		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
+	public Double salarioNeto(Integer nroMes) {
+		Double neto = 0.0;
+		if(super.obtenerFaltasDelMes(nroMes).equals(null)) {
+			neto = this.salarioBruto();
+		}else {
+			neto =  this.salarioBruto()-((this.salarioBruto()/30)*super.obtenerFaltasDelMes(nroMes));
+		}/*ej: 20000.0 + 2000.0 - (22000.0 /30 * 1)*/
+		return neto;
 	}
 	
+	public Double obtenerBonoFinAnio() {
+		Double bono = 0.0;
+		if(this.obtenerFaltasAnuales()>=1) {
+			bono = this.bonoFinAnio- ((this.bonoFinAnio/360.0)*this.obtenerFaltasAnuales());
+		}else {
+			bono =this.bonoFinAnio;
+		}
+		return bono;
+	}
 	
-	
-
 	
 	
 	

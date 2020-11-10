@@ -17,7 +17,6 @@ public class Persona implements CargaNovedades {
 	private Integer numLegajo; /* hashcode */
 	protected Integer antiguedad;
 	protected Integer ausentismo[];
-	protected Boolean estado;
 
 	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento,
 			Double salario, Integer antiguedad) {
@@ -29,11 +28,14 @@ public class Persona implements CargaNovedades {
 		this.salario = salario;
 		this.ausentismo = new Integer[12];
 		this.antiguedad = antiguedad;
-		this.estado = true;
 	}
 
 	public Persona(Integer id) {
 		this.dni = id;
+	}
+	
+	public Persona () {
+		
 	}
 
 	@Override
@@ -119,7 +121,7 @@ public class Persona implements CargaNovedades {
 		return ausentismo;
 	}
 
-	public void setAusentismo(Integer[] ausentismo) {
+	public void setFaltas(Integer[] ausentismo) {
 		this.ausentismo = ausentismo;
 	}
 
@@ -155,7 +157,7 @@ public class Persona implements CargaNovedades {
 	@Override
 	public Integer obtenerFaltasDelMes(Integer nroMes) {
 
-		return ausentismo[nroMes - 1];
+		return ausentismo[nroMes +1];
 	}
 
 	@Override
@@ -171,19 +173,18 @@ public class Persona implements CargaNovedades {
 	@Override
 	public Double salarioNeto(Integer nroMes) {
 		Double resta = (this.salario / 30) * ausentismo[nroMes - 1];
-
 		return salarioBruto() - resta;
 	}
 
 	@Override
 	public Double salarioBruto() {
-		Double bruto = this.salario + (this.salario * 5 / 100) * this.antiguedad;
+		Double bruto = this.salario + (this.salario * 5 / 100) * this.antiguedad; /*5%*/
 		return bruto;
 	}
 
 	@Override
 	public Double calcularAntiguedad() {
-		double antiguedad = this.antiguedad * (this.antiguedad * 5 / 100);
+		double antiguedad = this.salario * (this.antiguedad*0.05);
 		return antiguedad;
 	}
 
@@ -209,62 +210,25 @@ public class Persona implements CargaNovedades {
 
 	@Override
 	public void setDiasAusentesEnUnMes(Integer diasAusentes, Integer nroMes) {
-		this.ausentismo[nroMes - 1] = diasAusentes;
+		this.ausentismo[nroMes +1] = diasAusentes;
 
 	}
 
-	@Override
-	public void renunciarJubilarce() {
-		this.estado = false;
-
+	public Double calcularAusentismo(Integer nroMes) {
+		Double ausentismo = 0.0;
+		ausentismo = (this.salario / 30.0)*this.obtenerFaltasDelMes(nroMes); 
+		return ausentismo;
 	}
 
-	// AUSENTISMO Y ASIGNACION DE FECHA DE AUSENTISMO
-	private HashSet<String> fechasAusentes; /* creo un set de string para obtener la loista de fechas */
-	private Integer diasFaltados; /* contador de dias */
-	private final Integer maxDias = 30; /* por ley solo tengo 30 dias maximos */
-
-	public Persona() {
-		fechasAusentes = new HashSet<String>(maxDias);
-		this.diasFaltados = 0;
+	public Integer obtenerFaltasAnuales() { /*para que me de todos los dias que fue ausente */
+		Integer suma=0;
+        for (int i = 0; i <ausentismo.length; i++) {
+        	if(ausentismo[i]==null) { /*como el array almacena ibjetos wrapper sojn null y no 0 hay que convertir*/
+        		ausentismo[i]=0;
+        	}
+            suma+=ausentismo[i];
+        }
+		return suma;
 	}
-
-	public Boolean marcarAusente(Integer dia, Integer mes, Integer ano) {
-		Calendar ausente = Calendar.getInstance();
-		ausente.set(Calendar.DATE, dia);
-		ausente.set(Calendar.MONTH, mes);
-		ausente.set(Calendar.YEAR, ano);
-		Integer d = ausente.get(Calendar.DATE);
-		Integer m = ausente.get(Calendar.MONTH);
-		Integer a = ausente.get(Calendar.YEAR);
-		String fecha = d + "/" + m + "/" + a;
-		if (this.fechasAusentes.size() < this.maxDias) {
-			this.fechasAusentes.add(fecha);
-			this.diasFaltados++;
-			return true;
-		}
-		return false;
-	}
-
-	public String verificarDiasAusentes() { /* obtengo una losta de las fechas ausentes */
-		String fecha = "";
-		for (String string : fechasAusentes) {
-			fecha = fecha += string + "\n";
-		}
-		return fecha;
-	}
-
-	public Integer obtenerDiasAusentes() {
-		return this.diasFaltados;
-	}
-
-	@Override
-	public Boolean estado() {
-		return estado;
-	}
-
-	public void darAlta() {
-		this.estado = true;
-
-	}
+	
 }

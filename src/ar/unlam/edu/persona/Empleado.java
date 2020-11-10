@@ -2,87 +2,46 @@ package ar.unlam.edu.persona;
 
 import java.util.Calendar;
 
-import ar.unlam.edu.calendario.Calendario;
 import ar.unlam.edu.rrhh.CargaNovedades;
 
-public class Empleado extends Persona implements CargaNovedades{//un trabajador comun, no es jefe
-	//plus por nunca faltar - presentismo
+public class Empleado extends Persona implements CargaNovedades{//un trabajador comun, analista, obreo, etc
+	
+	private Double presentismo;
 
 	public Empleado(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento,
 			Double salario, Integer antiguedad) {
 		super(numLegajo, dni, nombre, apellido, fechaDeNacimiento, salario, antiguedad);
-		
+		this.presentismo=0.20; /*20% por nunca faltar*/
 	}	
 	
-
+	public Empleado() {
+		super();
+	}
 	
-
-	@Override
-	public Double LiquidacionFinal() {
-		Calendar hoy = Calendar.getInstance();			
-		Double salarioPorDia=salarioBruto()/30;
-		Integer diasRestantes=30-hoy.get(Calendar.DAY_OF_MONTH);
-		Double salarioLiquidado=salarioNeto(hoy.get(Calendar.MONTH)+1)-(salarioPorDia*diasRestantes);		
-		
-		return salarioLiquidado;
+	public Double calcularAntiguedad() {
+		double antiguedad = super.getSalario() * (this.antiguedad*0.05);
+		return antiguedad;
 	}
-
-	@Override
-	public Double salarioNeto(Integer nroMes) {
-		Double  resta=(this.salario/30)*ausentismo[nroMes-1];
-		
-		return salarioBruto()-resta;
+	
+	public Double calcularPresentismo() { /*Obtengo presentismo*/
+		Double presentismo = ((this.getSalario() + this.calcularAntiguedad())*this.presentismo);
+		return presentismo;
 	}
-
-	@Override
+	
 	public Double salarioBruto() {
-		Double bruto=this.salario+(this.salario*5/100)*this.antiguedad; 
+	Double bruto = this.getSalario() + this.calcularAntiguedad()+this.calcularPresentismo();
 		return bruto;
 	}
 
-	@Override
-	public Double calcularAntiguedad() {
-		double antiguedad=this.antiguedad*(this.antiguedad*5/100);
-		return antiguedad;
+	public Double salarioNeto(Integer nroMes) {
+		Double neto = 0.0;
+		if(super.obtenerFaltasDelMes(nroMes).equals(null)) {
+			neto = this.salarioBruto();
+		}else {
+			neto =  (this.getSalario()+this.calcularAntiguedad())-((this.getSalario() + this.calcularAntiguedad())/30*super.obtenerFaltasDelMes(nroMes));
+		}/*ej: 20000.0 + 2000.0 - (22000.0 /30 * 1)*/
+		return neto;
 	}
-
-	@Override
-	public String reporteMensual(Integer nroMes) {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		
-		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
-	}
-
-	@Override
-	public String reporteAnual() {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		Double anualSaldo=0.0;
-		Integer anualFaltas=0;
-		for (int i = 1; i < 13; i++) {
-			anualSaldo+=salarioNeto(i);
-		} 	
-		for (int i = 0; i < 12; i++) {
-			anualFaltas+=ausentismo[i];
-		}
-		
-		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
-	}
-	
-	
-	
-
-	
-
-	
-	
 	
 	
 	
