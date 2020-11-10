@@ -12,7 +12,7 @@ import ar.unlam.edu.persona.Persona;
 
 public class Sector implements DAO<Persona, Integer, String> {
 
-	static HashSet<Persona> produccion; // solo puede tener 1 gerente , 3 jefe por cada seccion y n empleados
+	static HashSet<Persona> produccion; 
 	static HashSet<Persona> ventas;
 	static HashSet<Persona> rrhh;
 	static HashSet<Persona> administracion;

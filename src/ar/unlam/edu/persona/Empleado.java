@@ -17,15 +17,7 @@ public class Empleado extends Persona implements CargaNovedades{//un trabajador 
 
 	
 
-	@Override
-	public Double LiquidacionFinal() {
-		Calendar hoy = Calendar.getInstance();			
-		Double salarioPorDia=salarioBruto()/30;
-		Integer diasRestantes=30-hoy.get(Calendar.DAY_OF_MONTH);
-		Double salarioLiquidado=salarioNeto(hoy.get(Calendar.MONTH)+1)-(salarioPorDia*diasRestantes);		
-		
-		return salarioLiquidado;
-	}
+
 
 	@Override
 	public Double salarioNeto(Integer nroMes) {
@@ -40,42 +32,9 @@ public class Empleado extends Persona implements CargaNovedades{//un trabajador 
 		return bruto;
 	}
 
-	@Override
-	public Double calcularAntiguedad() {
-		double antiguedad=this.antiguedad*(this.antiguedad*5/100);
-		return antiguedad;
-	}
 
-	@Override
-	public String reporteMensual(Integer nroMes) {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		
-		return "Saldo= "+ salarioNeto(nroMes)+", ausentismo= "+ausentismo[nroMes-1];
-	}
 
-	@Override
-	public String reporteAnual() {
-		
-		if(this.estado==false) {
-			return null;
-		}
-		
-		Double anualSaldo=0.0;
-		Integer anualFaltas=0;
-		for (int i = 1; i < 13; i++) {
-			anualSaldo+=salarioNeto(i);
-		} 	
-		for (int i = 0; i < 12; i++) {
-			anualFaltas+=ausentismo[i];
-		}
-		
-		return "Saldo= "+ anualSaldo+", ausentismo= "+anualFaltas;
-	}
-	
+
 	
 	
 
