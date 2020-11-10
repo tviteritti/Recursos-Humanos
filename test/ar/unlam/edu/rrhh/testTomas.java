@@ -123,8 +123,10 @@ public class testTomas {
 	@Test
 	public void queFuncioneLaBusqueda() {
 		
-		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Empleado g1=new Empleado(1, 123, "jorge", "lopez", null, 3007.0, 5);
 		Sector s1= new Sector();
+		
+		s1.agregarEmpleado(g1, "RRHH");
 		
 		Integer vo=s1.buscar(123).getDni();
 		Integer ve=123;
