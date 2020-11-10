@@ -23,7 +23,7 @@ public interface DAO<T, U, S> {
 
 	Boolean darAlta(T obj);
 
-	Boolean cerrar();
+
 
 	Set<T> getTodos();
 
