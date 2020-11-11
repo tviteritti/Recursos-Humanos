@@ -146,12 +146,12 @@ public class testTomas {
 		Sector s1= new Sector();
 		
 		
-//		assertEquals(s1.insertar(g1, "ventas"), true);
-//		Boolean estado = s1.actualizar(g1, "ventas");
-//		assertEquals(estado, true);
-//		Integer ve = s1.buscar(123).getDni();
-//		Integer vo = 123;
-//		assertEquals(ve, vo);
+		assertEquals(s1.insertar(g1, "ventas"), true);
+		Boolean estado = s1.actualizar(g1, "ventas");
+		assertEquals(estado, true);
+		Integer ve = s1.buscar(123).getDni();
+		Integer vo = 123;
+		assertEquals(ve, vo);
 		
 	}
 
