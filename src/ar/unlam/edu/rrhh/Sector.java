@@ -25,10 +25,9 @@ public class Sector implements DAO<Persona, Integer, String> {
 		this.ventas = new HashSet<Persona>();
 		this.rrhh = new HashSet<Persona>();
 		this.administracion = new HashSet<Persona>();
-
 	}
 
-	public Boolean agregarGerente(Gerente gerente, String sector) {
+	private Boolean agregarGerente(Gerente gerente, String sector) {
 
 		sector = sector.toUpperCase();
 
@@ -80,7 +79,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean agregarJefe(Jefe jefe, String sector) {
+	private Boolean agregarJefe(Jefe jefe, String sector) {
 
 		if (sector.equals(Area.ADMINISTRACION.name())) {
 			Iterator<Persona> it = administracion.iterator();
@@ -138,7 +137,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean agregarEmpleado(Empleado empleado, String sector) {
+	private Boolean agregarEmpleado(Empleado empleado, String sector) {
 
 		sector = sector.toUpperCase();
 		if (sector.equals(Area.PRODUCCION.name())) {
@@ -161,7 +160,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean modificarPersona(Persona obj, String sector) {
+	private Boolean modificarPersona(Persona obj, String sector) {
 
 		/*
 		 * if (produccion.contains(obj) && sector.equals(Area.PRODUCCION.name())) {
@@ -224,7 +223,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Persona EncontradoPersona(Integer id) {
+	private Persona EncontradoPersona(Integer id) {
 
 		Iterator<Persona> itad = administracion.iterator();
 		while (itad.hasNext()) {
@@ -282,7 +281,6 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	@Override
 	public Boolean actualizar(Persona obj, String sector) {
-
 		if (this.existe(obj.getDni())) {
 			sector = sector.toUpperCase();
 			return modificarPersona(obj, sector);
@@ -429,8 +427,6 @@ public class Sector implements DAO<Persona, Integer, String> {
 	return false;
 	}
 
-
-
 	@Override
 	public Set<Persona> getTodos() {
 		Set<Persona> todos = new HashSet<>();
@@ -451,7 +447,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!administracion.isEmpty()) {
 			Iterator<Persona> itad = administracion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
+				if (itad.next().getEstado()==false) {
 					todos.add(itad.next());
 				}
 			}
@@ -460,7 +456,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!rrhh.isEmpty()) {
 			Iterator<Persona> itad = rrhh.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
+				if (itad.next().getEstado()==false) {
 					todos.add(itad.next());
 				}
 			}
@@ -469,7 +465,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!ventas.isEmpty()) {
 			Iterator<Persona> itad = ventas.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
+				if (itad.next().getEstado()==false) {
 					todos.add(itad.next());
 				}
 			}
@@ -478,7 +474,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!produccion.isEmpty()) {
 			Iterator<Persona> itad = produccion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
+				if (itad.next().getEstado()==false) {
 					todos.add(itad.next());
 				}
 			}
@@ -496,7 +492,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!administracion.isEmpty()) {
 			Iterator<Persona> itad = administracion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
@@ -505,7 +501,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!rrhh.isEmpty()) {
 			Iterator<Persona> itad = rrhh.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
@@ -514,7 +510,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!ventas.isEmpty()) {
 			Iterator<Persona> itad = ventas.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
@@ -523,7 +519,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!produccion.isEmpty()) {
 			Iterator<Persona> itad = produccion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}

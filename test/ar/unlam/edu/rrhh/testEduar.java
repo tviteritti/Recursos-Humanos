@@ -13,7 +13,7 @@ import ar.unlam.edu.persona.Jefe;
 import ar.unlam.edu.persona.Persona;
 
 public class testEduar {
-	/*la fecha de nacimiento arroja null pero se puede setar con una instanciacion de la Clase calendar Calendar;*/
+	/*la fecha de nacimiento arroja null pero se puede setear con una instanciacion de la Clase Calendar;*/
 
 	@Test
 	public void pruebaLiquidacionConEmpleado() {
@@ -43,18 +43,18 @@ public class testEduar {
 			Double vob = 120000.0;
 			assertEquals(veb, vob, 0.01);
 			
-////			local.setDiasAusentesEnUnMes(10, 10);
-//			Integer v = local.obtenerFaltasDelMes(10);
-//			Integer e= 10;
-//			assertEquals(v,e);
-//			
-//			Double ven=local.salarioNeto(10);
-//			Double von=80000.0;
-//			assertEquals(ven, von, 0.01);
+			local.setDiasAusentesEnUnMes(10, 10);
+			Integer v = local.obtenerFaltasDelMes(10);
+			Integer e= 10;
+			assertEquals(v,e);
+			
+			Double ven=local.salarioNeto(10);
+			Double von=80000.0;
+			assertEquals(ven, von, 0.01);
 			
 			
 			Double bono = local.obtenerBonoFinAnio();
-			Double bonoE = 50000.0;//48611.11; /*falto 10 dias*/
+			Double bonoE = 48611.11; /*falto 10 dias*/
 			assertEquals(bono, bonoE, 0.01);
 					
 	}
