@@ -27,7 +27,7 @@ public class testIan {
 	}
 	
 	@Test
-	public void QueSecalculeCorrectamenteElSalarioBruto() {
+	public void QueSeCalculeCorrectamenteElSalarioBruto() {
 		
 		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, 10);
 		
@@ -49,11 +49,9 @@ public class testIan {
 	@Test
 	public void QueSecalculeCorrectamenteElSalarioNeto() {
 		
-		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, 10);
+		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, 0);
 		
-		Integer ausentismo[]=new Integer [12];
-		ausentismo[4-1]=5;
-		jefe.setAusentismo(ausentismo);
+		jefe.setDiasAusentesEnUnMes(5, 4);
 		
 		Double descuento=(double)(jefe.getSalario()/30)*jefe.obtenerFaltasDelMes(4);
 		Double salarioNeto=jefe.salarioBruto()-descuento;
@@ -71,10 +69,8 @@ public class testIan {
 		
 		Integer mes=8;
 		Integer faltas=9;
-		Integer ausentismo[]=new Integer[12];
-		ausentismo[mes-1]=faltas;
 		
-		jefe.setAusentismo(ausentismo);
+		jefe.setDiasAusentesEnUnMes(faltas, mes);
 		
 		assertEquals(jefe.obtenerFaltasDelMes(mes), faltas);
 		
@@ -85,10 +81,9 @@ public class testIan {
 	public void QueCalculeCorrectamenteLaAntiguedad() {
 		
 		Integer anosAntiguedad=10;
-		Persona jefe=new Jefe(null, null, null, null, null, null, anosAntiguedad);
+		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, anosAntiguedad);
 		
-		Double antiguedad=(double)anosAntiguedad*(anosAntiguedad*5/100);
-		
+		Double antiguedad=(anosAntiguedad*0.05)*jefe.getSalario();
 		
 		assertEquals(jefe.calcularAntiguedad(), antiguedad);
 		
@@ -96,19 +91,42 @@ public class testIan {
 	}
 	
 	@Test
-	public void QueNoSePuedaSacarUnReporteDeAlguienQueNoTrabaja() {
+	public void QueSeObtenganLasFaltasAnualesCorrectamente() {
 		
 		Persona jefe=new Jefe(123, 123, "Jose", "Alvarez", null, 1000.0, 0);
 		
 		assertNotNull(jefe);
 		
-		jefe.renunciarJubilarce();
+		Integer faltas=5;
 		
-		assertNull(jefe.reporteAnual());
+		jefe.setDiasAusentesEnUnMes(faltas, 2);
+		jefe.setDiasAusentesEnUnMes(faltas, 3);
+		jefe.setDiasAusentesEnUnMes(faltas, 4);
+		jefe.setDiasAusentesEnUnMes(faltas, 5);
+		jefe.setDiasAusentesEnUnMes(faltas, 6);
+		
+		faltas=faltas*5;
+		
+		assertEquals(jefe.obtenerFaltasAnuales(), faltas);
 		
 		
 	}
 	
+	
+	
+	
+	@Test
+	public void QueSeRealiceUnReporteMensualCorrectamente() {
+		
+		Jefe jefe=new Jefe(123, 123, "Jose", "Alvarez", null, 1000.0, 0);
+		Integer mes= 4 ;
+		
+		jefe.setDiasAusentesEnUnMes(5, mes);
+		
+		String reporte="Saldo= " + jefe.salarioNeto(mes) + ", ausentismo= " + jefe.obtenerFaltasDelMes(mes);
+		
+		assertEquals(jefe.reporteMensual(mes), reporte);
+	}
 	
 
 }

@@ -113,6 +113,8 @@ public class testTomas {
 	
 	@Test
 	public void queFuncioneLaBusquedaAgregarYEliminar() {
+		/*aplicado a la clase SectorDos*/
+		
 		
 		Persona g1=new Persona(1, 123, "jorge", "lopez", null, 3007.0, 5);
 //		Sector s1= new Sector();
@@ -129,6 +131,27 @@ public class testTomas {
 		
 		s1.eliminar(g1, "administracion");
 		assertNull(s1.buscar(123, "administracion")); 
+		
+	}
+	
+	
+	@Test
+	public void probarSector() {
+		
+		Persona g1=new Gerente(1, 123, "jorge", "lopez", null, 3007.0, 5);
+		Persona g2=new Gerente(11, 1234, "jorge2", "lopez2", null, 3015.0, 6);
+
+		Persona j1=new Jefe(2, 456, "federico", "perez", null, 3000.0, 0);
+		Persona e1=new Empleado(33, 78910, "tomas2", "diaz2",null, 3101.0, 1);
+		Sector s1= new Sector();
+		
+		
+//		assertEquals(s1.insertar(g1, "ventas"), true);
+//		Boolean estado = s1.actualizar(g1, "ventas");
+//		assertEquals(estado, true);
+//		Integer ve = s1.buscar(123).getDni();
+//		Integer vo = 123;
+//		assertEquals(ve, vo);
 		
 	}
 

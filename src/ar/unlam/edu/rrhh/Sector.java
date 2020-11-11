@@ -347,7 +347,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			while (itad.hasNext()) {
 				if (obj.equals(itad.next())) {
 					itad.remove();
-					obj.darBaja();
+					obj.renunciarJubilarce();
 					administracion.add(obj);
 					return true;
 				}
@@ -356,8 +356,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			Iterator<Persona> itpro = produccion.iterator();
 			while (itpro.hasNext()) {
 				if (obj.equals(itpro.next())) {
-					itad.remove();
-					obj.darBaja();
+					itpro.remove();
+					obj.renunciarJubilarce();
 					produccion.add(obj);
 					return true;
 				}
@@ -366,7 +366,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			Iterator<Persona> itrrhh = rrhh.iterator();
 			while (itrrhh.hasNext()) {
 				if (obj.equals(itrrhh.next())) {
-					itad.remove();
+					itrrhh.remove();
 					obj.darBaja();
 					rrhh.add(obj);
 					return true;
@@ -376,8 +376,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			Iterator<Persona> itventas = ventas.iterator();
 			while (itventas.hasNext()) {
 				if (obj.equals(itventas.next())) {
-					itad.remove();
-					obj.darBaja();
+					itventas.remove();
+					obj.renunciarJubilarce();
 					ventas.add(obj);
 					return true;
 				}

@@ -232,18 +232,30 @@ public class Persona implements CargaNovedades {
         }
 		return suma;
 	}
-	
-	public Boolean getEstado() {
-		return this.estado;
+
+	public void renunciarJubilarce() {
+		this.estado = false;
+		
 	}
+	
+	public void darAlta() {
+		this.estado = true;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+	
 	
 	public Boolean darBaja() {
 		return this.estado = false;
 	}
 	
-	public Boolean darAlta() {
-		return this.estado = true;
-	}
+	
 	
 	
 }

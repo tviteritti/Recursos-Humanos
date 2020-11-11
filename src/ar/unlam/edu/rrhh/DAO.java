@@ -3,7 +3,8 @@ package ar.unlam.edu.rrhh;
 import java.util.List;
 import java.util.Set;
 
-public interface DAO<T, U, S> {
+public interface DAO<T, U, S> {    
+	/* data access object */
 
 	Boolean insertar(T obj, S sector);
 
