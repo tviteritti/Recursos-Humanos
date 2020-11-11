@@ -56,7 +56,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					return false;
 				}
 			}
-			return produccion.add(gerente);
+			return administracion.add(gerente);
 		}
 
 		if (sector.equals(Area.RRHH.name())) {
@@ -67,7 +67,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					return false;
 				}
 			}
-			return produccion.add(gerente);
+			return rrhh.add(gerente);
 		}
 
 		if (sector.equals(Area.VENTAS.name())) {
@@ -78,7 +78,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					return false;
 				}
 			}
-			return produccion.add(gerente);
+			return ventas.add(gerente);
 		}
 
 		return false;
@@ -97,7 +97,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					cantJefesProduccion++;
 				}
 			}
-			return produccion.add(jefe);
+			return administracion.add(jefe);
 		}
 
 		if (sector.equals(Area.RRHH.name())) {
@@ -110,7 +110,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					cantJefesProduccion++;
 				}
 			}
-			return produccion.add(jefe);
+			return rrhh.add(jefe);
 		}
 
 		if (sector.equals(Area.VENTAS.name())) {
@@ -123,7 +123,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					cantJefesProduccion++;
 				}
 			}
-			return produccion.add(jefe);
+			return ventas.add(jefe);
 		}
 
 		if (sector.equals(Area.PRODUCCION.name())) {
@@ -265,6 +265,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 		if (obj instanceof Empleado) {
 			Empleado empleado = (Empleado) obj;
+			
 			return agregarEmpleado(empleado, sector);
 		}
 
@@ -308,6 +309,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 		Iterator<Persona> itad = administracion.iterator();
 		while (itad.hasNext()) {
 			if (id.equals(itad.next().getDni())) {
+				
 				return true;
 			}
 		}

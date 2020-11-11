@@ -35,7 +35,21 @@ public class testVictor {
 		Persona ve = s1.buscar(123);	
 	//	System.out.print(ve.toString());
 		Integer v = 123;
-	// assertEquals(ve.getDni(), v);	fail("Not yet implemented");
+		assertEquals(ve.getDni(), v);	
+		
+		
+	}
+	
+	@Test 
+	public void cargarDosGerentes () {
+		Persona g1=new Gerente(1, 123, "gecter", "werewr", null, 3007.0, 5);
+		Persona g2=new Gerente(11, 1234, "vicer", "swerew", null, 3015.0, 6);
+		Sector s1= new Sector();
+		Boolean estado = s1.insertar(g1, "ventas");
+		
+		
+		
+		Assert.assertEquals(false, s1.insertar(g2, "ventas") );
 	}
 
 }
