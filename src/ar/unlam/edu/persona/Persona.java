@@ -17,6 +17,7 @@ public class Persona implements CargaNovedades {
 	private Integer numLegajo; /* hashcode */
 	protected Integer antiguedad;
 	protected Integer ausentismo[];
+	private Boolean estado;
 
 	public Persona(Integer numLegajo, Integer dni, String nombre, String apellido, Calendar fechaDeNacimiento,
 			Double salario, Integer antiguedad) {
@@ -28,6 +29,7 @@ public class Persona implements CargaNovedades {
 		this.salario = salario;
 		this.ausentismo = new Integer[12];
 		this.antiguedad = antiguedad;
+		this.estado = true;
 	}
 
 	public Persona(Integer id) {
@@ -230,5 +232,18 @@ public class Persona implements CargaNovedades {
         }
 		return suma;
 	}
+	
+	public Boolean getEstado() {
+		return this.estado;
+	}
+	
+	public Boolean darBaja() {
+		return this.estado = false;
+	}
+	
+	public Boolean darAlta() {
+		return this.estado = true;
+	}
+	
 	
 }

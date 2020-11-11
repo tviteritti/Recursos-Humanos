@@ -12,12 +12,18 @@ import ar.unlam.edu.persona.Persona;
 
 public class Sector implements DAO<Persona, Integer, String> {
 
-	static HashSet<Persona> produccion; 
-	static HashSet<Persona> ventas;
-	static HashSet<Persona> rrhh;
-	static HashSet<Persona> administracion;
+
+
+
+	static HashSet<Persona> bajas;
+
+	static Set<Persona> produccion; 
+	static Set<Persona> ventas;
+	static Set<Persona> rrhh;
+	static Set<Persona> administracion;
 	
-	static HashSet<Persona>bajas;
+	
+
 	final static Integer cantJefes = 3;
 
 	public Sector() {
@@ -25,10 +31,9 @@ public class Sector implements DAO<Persona, Integer, String> {
 		this.ventas = new HashSet<Persona>();
 		this.rrhh = new HashSet<Persona>();
 		this.administracion = new HashSet<Persona>();
-
 	}
 
-	public Boolean agregarGerente(Gerente gerente, String sector) {
+	private Boolean agregarGerente(Gerente gerente, String sector) {
 
 		sector = sector.toUpperCase();
 
@@ -80,7 +85,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean agregarJefe(Jefe jefe, String sector) {
+	private Boolean agregarJefe(Jefe jefe, String sector) {
 
 		if (sector.equals(Area.ADMINISTRACION.name())) {
 			Iterator<Persona> it = administracion.iterator();
@@ -138,7 +143,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean agregarEmpleado(Empleado empleado, String sector) {
+	private Boolean agregarEmpleado(Empleado empleado, String sector) {
 
 		sector = sector.toUpperCase();
 		if (sector.equals(Area.PRODUCCION.name())) {
@@ -161,7 +166,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	}
 
-	public Boolean modificarPersona(Persona obj, String sector) {
+	private Boolean modificarPersona(Persona obj, String sector) {
 
 		/*
 		 * if (produccion.contains(obj) && sector.equals(Area.PRODUCCION.name())) {
@@ -177,7 +182,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					estado = true;
 				}
 			}
-			return (estado) ? produccion.add(obj) : false;
+			return produccion.add(obj) ;
 
 		}
 
@@ -191,7 +196,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 				}
 			}
 
-			return (estado) ? administracion.add(obj) : false;
+			return administracion.add(obj);
 
 		}
 
@@ -204,7 +209,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 					estado = true;
 				}
 			}
-			return (estado) ? rrhh.add(obj) : false;
+			return rrhh.add(obj);
 
 		}
 
@@ -217,14 +222,14 @@ public class Sector implements DAO<Persona, Integer, String> {
 					estado = true;
 				}
 			}
-			return (estado) ? ventas.add(obj) : false;
+			return ventas.add(obj);
 		}
 
 		return false;
 
 	}
 
-	public Persona EncontradoPersona(Integer id) {
+	private Persona EncontradoPersona(Integer id) {
 
 		Iterator<Persona> itad = administracion.iterator();
 		while (itad.hasNext()) {
@@ -282,7 +287,6 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	@Override
 	public Boolean actualizar(Persona obj, String sector) {
-
 		if (this.existe(obj.getDni())) {
 			sector = sector.toUpperCase();
 			return modificarPersona(obj, sector);
@@ -343,7 +347,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			while (itad.hasNext()) {
 				if (obj.equals(itad.next())) {
 					itad.remove();
-					obj.renunciarJubilarce();
+					obj.darBaja();
 					administracion.add(obj);
 					return true;
 				}
@@ -353,7 +357,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			while (itpro.hasNext()) {
 				if (obj.equals(itpro.next())) {
 					itad.remove();
-					obj.renunciarJubilarce();
+					obj.darBaja();
 					produccion.add(obj);
 					return true;
 				}
@@ -363,7 +367,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			while (itrrhh.hasNext()) {
 				if (obj.equals(itrrhh.next())) {
 					itad.remove();
-					obj.renunciarJubilarce();
+					obj.darBaja();
 					rrhh.add(obj);
 					return true;
 				}
@@ -373,7 +377,7 @@ public class Sector implements DAO<Persona, Integer, String> {
 			while (itventas.hasNext()) {
 				if (obj.equals(itventas.next())) {
 					itad.remove();
-					obj.renunciarJubilarce();
+					obj.darBaja();
 					ventas.add(obj);
 					return true;
 				}
@@ -425,11 +429,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			}
 		}
 
-	
-	return false;
+		return false;
 	}
-
-
 
 	@Override
 	public Set<Persona> getTodos() {
@@ -451,43 +452,51 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!administracion.isEmpty()) {
 			Iterator<Persona> itad = administracion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
+				if (itad.next().getEstado() == false) {
+
 					todos.add(itad.next());
 				}
 			}
 		}
-		
+
 		if (!rrhh.isEmpty()) {
-			Iterator<Persona> itad = rrhh.iterator();
-			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
-					todos.add(itad.next());
+			Iterator<Persona> itrh = rrhh.iterator();
+			while (itrh.hasNext()) {
+
+				if (itrh.next().getEstado() == false) {
+
+					todos.add(itrh.next());
 				}
 			}
 		}
-		
+
 		if (!ventas.isEmpty()) {
-			Iterator<Persona> itad = ventas.iterator();
-			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
-					todos.add(itad.next());
+			Iterator<Persona> itven = ventas.iterator();
+			while (itven.hasNext()) {
+
+			
+				if (itven.next().getEstado()==false) {
+
+					todos.add(itven.next());
 				}
 			}
 		}
-		
+
 		if (!produccion.isEmpty()) {
-			Iterator<Persona> itad = produccion.iterator();
-			while (itad.hasNext()) {
-				if (itad.next().estado()==false) {
-					todos.add(itad.next());
+			Iterator<Persona> itpro = produccion.iterator();
+			while (itpro.hasNext()) {
+
+				
+
+				if (itpro.next().getEstado()==false) {
+
+					todos.add(itpro.next());
 				}
 			}
 		}
-		
-		return todos; 
-		
-		
-		
+
+		return todos;
+
 	}
 
 	@Override
@@ -496,49 +505,49 @@ public class Sector implements DAO<Persona, Integer, String> {
 		if (!administracion.isEmpty()) {
 			Iterator<Persona> itad = administracion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
 		}
-		
+
 		if (!rrhh.isEmpty()) {
 			Iterator<Persona> itad = rrhh.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
 		}
-		
+
 		if (!ventas.isEmpty()) {
 			Iterator<Persona> itad = ventas.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
 		}
-		
+
 		if (!produccion.isEmpty()) {
 			Iterator<Persona> itad = produccion.iterator();
 			while (itad.hasNext()) {
-				if (itad.next().estado()) {
+				if (itad.next().getEstado()) {
 					todos.add(itad.next());
 				}
 			}
 		}
-		
-		return todos; 
-		
+
+		return todos;
+
 	}
 
 	@Override
 	public Boolean existe(Integer id, String sector) {
-		
+
 		sector = sector.toUpperCase();
-		
-		if(sector.equals(Area.ADMINISTRACION.name())) {
+
+		if (sector.equals(Area.ADMINISTRACION.name())) {
 			Iterator<Persona> itad = administracion.iterator();
 			while (itad.hasNext()) {
 				if (id.equals(itad.next().getDni())) {
@@ -547,8 +556,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			}
 
 		}
-		
-		if(sector.equals(Area.RRHH.name())) {
+
+		if (sector.equals(Area.RRHH.name())) {
 			Iterator<Persona> itrrhh = rrhh.iterator();
 			while (itrrhh.hasNext()) {
 				if (id.equals(itrrhh.next().getDni())) {
@@ -557,8 +566,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			}
 
 		}
-		
-		if(sector.equals(Area.VENTAS.name())) {
+
+		if (sector.equals(Area.VENTAS.name())) {
 			Iterator<Persona> itven = ventas.iterator();
 			while (itven.hasNext()) {
 				if (id.equals(itven.next().getDni())) {
@@ -567,8 +576,8 @@ public class Sector implements DAO<Persona, Integer, String> {
 			}
 
 		}
-		
-		if(sector.equals(Area.PRODUCCION.name())) {
+
+		if (sector.equals(Area.PRODUCCION.name())) {
 			Iterator<Persona> itpro = produccion.iterator();
 			while (itpro.hasNext()) {
 				if (id.equals(itpro.next().getDni())) {
@@ -577,18 +586,59 @@ public class Sector implements DAO<Persona, Integer, String> {
 			}
 
 		}
-		
+
 		return false;
-		
-		
-		
-		
+
 	}
 
 	@Override
 	public Boolean eliminar(Persona obj, String sector) {
-		// TODO Auto-generated method stub
-		return null;
+		sector = sector.toUpperCase();
+		if ( this.existe(obj.getDni(), sector)){
+		
+			if (sector.equals(Area.ADMINISTRACION.name())) {
+				Iterator<Persona> itad = administracion.iterator();
+				while (itad.hasNext()) {
+					if (obj.equals(itad.next())&& itad.next().getEstado() == false) {
+					 itad.remove();
+					 return true;
+					}
+				}
+			}
+			
+			if (sector.equals(Area.RRHH.name())) {
+				Iterator<Persona> itrh = rrhh.iterator();
+				while (itrh.hasNext()) {
+					if (obj.equals(itrh.next())&& itrh.next().getEstado() == false) {
+						itrh.remove();
+						 return true;
+					}
+				}
+			}
+			
+			
+			if (sector.equals(Area.VENTAS.name())) {
+				Iterator<Persona> itvent = ventas.iterator();
+				while (itvent.hasNext()) {
+					if (obj.equals(itvent.next())&& itvent.next().getEstado() == false) {
+						itvent.remove();
+						 return true;
+					}
+				}
+			}
+			
+			if (sector.equals(Area.VENTAS.name())) {
+				Iterator<Persona> itpro = produccion.iterator();
+				while (itpro.hasNext()) {
+					if (obj.equals(itpro.next())&& itpro.next().getEstado() == false) {
+						itpro.remove();
+						 return true;
+					}
+				}
+			}
+		}
+		return false;
+		
 	}
 
 	@Override
