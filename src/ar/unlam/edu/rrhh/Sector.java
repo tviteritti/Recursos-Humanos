@@ -231,35 +231,32 @@ public class Sector implements DAO<Persona, Integer, String> {
 
 	private Persona EncontradoPersona(Integer id) {
 
-		Iterator<Persona> itad = administracion.iterator();
-		while (itad.hasNext()) {
-			if (id.equals(itad.next().getDni())) {
-				return itad.next();
-			}
-		}
 
-		Iterator<Persona> itpro = produccion.iterator();
-		while (itpro.hasNext()) {
-			if (id.equals(itpro.next().getDni())) {
-				return itpro.next();
-			}
-		}
-
-		Iterator<Persona> itrrhh = rrhh.iterator();
-		while (itrrhh.hasNext()) {
-			if (id.equals(itrrhh.next().getDni())) {
-				return itrrhh.next();
-			}
-		}
-
-		Iterator<Persona> itventas = ventas.iterator();
-		while (itventas.hasNext()) {
-			if (id.equals(itventas.next().getDni())) {
-				return itventas.next();
-			}
-		}
-
+		 for (Persona obj : ventas) { 
+		     if (obj.getDni().equals(id)) 
+		      return obj; 
+		     } 
+		
+		 for (Persona obj : administracion) { 
+		     if (obj.getDni().equals(id)) 
+		      return obj; 
+		     } 
+		
+		 for (Persona obj : produccion) { 
+		     if (obj.getDni().equals(id)) 
+		      return obj; 
+		     } 
+		 
+		 for (Persona obj : rrhh) { 
+		     if (obj.getDni().equals(id)) 
+		      return obj; 
+		     } 
+		
+		
+		
+		    
 		return null;
+
 
 	}
 
@@ -299,8 +296,9 @@ public class Sector implements DAO<Persona, Integer, String> {
 	public Persona buscar(Integer id) {
 		if (this.existe(id)) {
 
-			return EncontradoPersona(id);
+			return (Persona) EncontradoPersona(id);
 		}
+		
 		return null;
 	}
 
