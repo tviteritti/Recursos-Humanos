@@ -40,27 +40,6 @@ public class testIan {
 		
 	}
 	
-	@Test
-	public void QueSecalculeCorrectamenteLaLiquidacionFinal() {
-		
-		
-	}
-	
-	@Test
-	public void QueSecalculeCorrectamenteElSalarioNeto() {
-		
-		Persona jefe=new Jefe(null, null, null, null, null, 1000.0, 0);
-		
-		jefe.setDiasAusentesEnUnMes(5, 4);
-		
-		Double descuento=(double)(jefe.getSalario()/30)*jefe.obtenerFaltasDelMes(4);
-		Double salarioNeto=jefe.salarioBruto()-descuento;
-		
-		
-		assertEquals(jefe.salarioNeto(4), salarioNeto);
-		
-		
-	}
 	
 	@Test
 	public void QueSecalculeCorrectamenteLasFaltasDelMes() {
@@ -126,6 +105,99 @@ public class testIan {
 		String reporte="Saldo= " + jefe.salarioNeto(mes) + ", ausentismo= " + jefe.obtenerFaltasDelMes(mes);
 		
 		assertEquals(jefe.reporteMensual(mes), reporte);
+	}
+	
+	@Test
+	public void QueSeInserteCorrectamenteUnJefeEnUnSector() {
+		
+		Integer id=123;
+		Jefe jefe=new Jefe(123, id, "Jose", "Alvarez", null, 1000.0, 0);
+		
+		Sector sector= new Sector();
+		sector.insertar(jefe, "Produccion");
+		sector.actualizar(jefe, "Produccion");
+		
+		assertEquals(sector.buscar(id), jefe);
+	}
+	    
+	
+	
+	@Test
+	public void QueNoSePuedanAgregar2GerentesAUnMismoSector() {
+		
+		Integer id=123;
+		Integer id2=1234;
+		Gerente gerente=new Gerente(1234, id, "Jose", "Alvarez", null, 1000.0, 0);
+		Gerente gerente2=new Gerente(123, id2, "Pedro", "Estevez", null, 1000.0, 0);
+		
+		
+		Sector sector= new Sector();
+		sector.insertar(gerente, "Produccion");
+		sector.actualizar(gerente, "Produccion");
+		sector.insertar(gerente2, "Produccion");
+		sector.actualizar(gerente2, "Produccion");
+		
+		assertNull(sector.buscar(id2));
+		
+	}
+	
+	
+	@Test
+	public void QueSePuedanInsertarUnEmpleadoJefeYGerenteAUnMismoSector() {
+		
+	Integer id=123;
+	Integer id2=1234;
+	Integer id3=12345;
+	Empleado empleado=new Empleado(1233, id, "Jose", "Alvarez", null, 1000.0, 0);
+	Gerente gerente=new Gerente(1234, id2, "Pedro", "Estevez", null, 1000.0, 0);
+	Jefe jefe=new Jefe(1231, id3, "Alberto", "Nuñez", null, 1000.0, 0);
+	
+	Sector sector= new Sector();
+	sector.insertar(gerente, "Produccion");
+	sector.actualizar(gerente, "Produccion");
+	sector.insertar(empleado, "Produccion");
+	sector.actualizar(empleado, "Produccion");
+	sector.insertar(jefe, "Produccion");
+	sector.actualizar(jefe, "Produccion");
+	
+	assertEquals(sector.buscar(id), empleado);
+	assertEquals(sector.buscar(id2), gerente);
+	assertEquals(sector.buscar(id3), jefe);
+	
+
+}
+	
+
+	@Test
+	public void QueNoSePuedanInsertarMasDe3JefesAUnMismoSector() {
+		
+		Integer id=12;
+		Integer id1=123;
+		Integer id2=1234;
+		Integer id3=12345;
+		Jefe jefe=new Jefe(1, id, "Alberto", "Nuñez", null, 1000.0, 0);
+		Jefe jefe1=new Jefe(2, id1, "Pedro", "Nuñez", null, 1000.0, 0);
+		Jefe jefe2=new Jefe(3, id2, "Jose", "Nuñez", null, 1000.0, 0);
+		Jefe jefe3=new Jefe(4, id3, "Ian", "Nuñez", null, 1000.0, 0);
+		
+		
+		Sector sector= new Sector();
+		sector.insertar(jefe, "Produccion");
+		sector.actualizar(jefe, "Produccion");
+		sector.insertar(jefe1, "Produccion");
+		sector.actualizar(jefe1, "Produccion");
+		sector.insertar(jefe2, "Produccion");
+		sector.actualizar(jefe2, "Produccion");
+		sector.insertar(jefe3, "Produccion");
+		sector.actualizar(jefe3, "Produccion");
+		
+		
+		assertEquals(sector.buscar(id), jefe);
+		assertEquals(sector.buscar(id1), jefe1);
+		assertEquals(sector.buscar(id2), jefe2);
+		assertEquals(sector.buscar(id3), jefe3);
+		
+		
 	}
 	
 
